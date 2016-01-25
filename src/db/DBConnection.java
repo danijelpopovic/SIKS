@@ -6,10 +6,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
 
 public class DBConnection {
 
 	private static Connection conn;
+	private static final String LOCK_TIMEOUT_INTERVAL = "5000";
 
 	public static Connection getConnection() {
 		if (conn == null)
@@ -20,47 +23,33 @@ public class DBConnection {
 			}
 		return conn;
 	}
-	
-			static String driver = "org.h2.Driver";
-			/*static String url = "jdbc:jtds:sqlserver://localhost/Magacin";
-			static String username = "user";
-			static String password = "user";*/
 
 	public static void open() throws ClassNotFoundException, SQLException {
 		if (conn != null)
 			return;
-		//ResourceBundle bundle = PropertyResourceBundle
-		//		.getBundle("DBConnection"); // ime fajla
-		//String driver = bundle.getString("driver"); // Ime parametara
-		//String url = bundle.getString("url");
-		//String username = bundle.getString("username");
-		//String password = bundle.getString("password");
+		ResourceBundle bundle = PropertyResourceBundle
+				.getBundle("DBConnection"); // ime fajla
+		String driver = bundle.getString("driver"); // Ime parametara
+		String url = bundle.getString("url");
+		String username = bundle.getString("username");
+		String password = bundle.getString("password");
 		Class.forName(driver); // Registrovanje drajvera
-		conn = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+		conn = DriverManager.getConnection(url, username, password);
 		conn.setAutoCommit(false);
-		DatabaseMetaData metaData = DBConnection.getConnection().getMetaData();
-		ResultSet set = metaData.getTableTypes();
-		while (set.next()) {
-			System.out.println(set.getString("TABLE_TYPE"));
-		}
-		setLockTimeOut(); 
+
+		System.out.println("DB opened");
 	}
 
 	public static void close() {
 		try {
-			if (conn != null)
+			if (conn != null) {
 				conn.close();
+				conn = null;
+				System.out.println("DB closed");
+			}
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-	}
-
-	private static final String LOCK_TIMEOUT_INTERVAL = "5000";
-
-	private static void setLockTimeOut() throws SQLException {
-		Statement stmt = conn.createStatement();
-		String cmd = "SET LOCK_TIMEOUT " + LOCK_TIMEOUT_INTERVAL;
-		stmt.execute(cmd);
 	}
 }
 
