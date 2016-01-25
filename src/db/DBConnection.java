@@ -37,7 +37,7 @@ public class DBConnection {
 		conn = DriverManager.getConnection(url, username, password);
 		conn.setAutoCommit(false);
 
-		System.out.println("DB opened");
+		System.out.println("DB connected...");
 	}
 
 	public static void close() {
