@@ -1,18 +1,15 @@
 package db;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 public class DBConnection {
 
 	private static Connection conn;
-	private static final String LOCK_TIMEOUT_INTERVAL = "5000";
+	//private static final String LOCK_TIMEOUT_INTERVAL = "5000";
 
 	public static Connection getConnection() {
 		if (conn == null)

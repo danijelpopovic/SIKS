@@ -13,6 +13,10 @@ import javax.swing.tree.TreeSelectionModel;
 
 public class MainFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static MainFrame instance = null;
 	private JPanel treePanel = new JPanel();
 	

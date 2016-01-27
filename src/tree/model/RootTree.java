@@ -42,6 +42,7 @@ public class RootTree implements TreeNode{
 		return false;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Enumeration children() {
 		// TODO Auto-generated method stub
