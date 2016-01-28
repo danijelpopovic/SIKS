@@ -2,17 +2,20 @@ package app;
 
 import gui.MainFrame;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import model.Faze;
-import model.Koraci;
-import model.ModelZcSoftvera;
+import model.Faza;
+import model.Korak;
+import model.ModelZCSoftvera;
 import model.StrukturaModela;
-import services.FazeService;
-import services.KoraciService;
-import services.ModelZcSoftveraService;
+import services.FazaService;
+import services.KorakService;
+import services.ModelZCSoftveraService;
 import services.StrukturaModelaService;
 import util.JPAUtil;
 
@@ -27,22 +30,27 @@ public class Application {
 			EntityManagerFactory emf = Persistence.createEntityManagerFactory("SIKS");
 			EntityManager em = emf.createEntityManager();
 			
-			ModelZcSoftveraService mzcss = new ModelZcSoftveraService(em);
-			KoraciService ks = new KoraciService(em);
-			FazeService fs = new FazeService(em);
+			ModelZCSoftveraService mzcss = new ModelZCSoftveraService(em);
+			KorakService ks = new KorakService(em);
+			FazaService fs = new FazaService(em);
 			StrukturaModelaService sms = new StrukturaModelaService(em);
 
 			em.getTransaction().begin();
-			ModelZcSoftvera emp1 = mzcss.createModelZcSoftvera(0, 1, "Model", "mdl", "Test model");
-			Koraci emp2 = ks.createKoraci(0, "Prvi korak");
-			Faze emp3 = fs.createFaze(0, 3, "Prva faza");
-			StrukturaModela emp4 = sms.createStrukturaModela(0, 4, 5);
+			ModelZCSoftvera emp1 = mzcss.createModelZcSoftvera(0, "Model", "mdl", "Test model");
+			Faza emp3 = fs.createFaza(0, "Prva faza");
+			Korak emp2 = ks.createKorak(0, "Prvi korak", emp3);
+			
+			StrukturaModela emp4 = sms.createStrukturaModela(0, 4, 5, emp1, emp2);
+			Set<StrukturaModela> strukture = new HashSet<StrukturaModela>();
+			strukture.add(emp4);
+			StrukturaModela emp5 = sms.createPovezanaStrukturaModela(0, 4, 5, emp1, emp2, strukture);
 			// service.removeProfessor(1);
 			em.getTransaction().commit();
 			System.out.println("Persisted " + emp1);
 			System.out.println("Persisted " + emp2);
 			System.out.println("Persisted " + emp3);
 			System.out.println("Persisted " + emp4);
+			System.out.println("Persisted " + emp5);
 
 			util.checkData("select * from ModelZcSoftvera");
 			util.checkData("select * from Koraci");

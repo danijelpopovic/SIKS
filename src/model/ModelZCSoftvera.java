@@ -3,11 +3,9 @@ package model;
 import java.util.List;
 
 
-public class ModelZcSoftvera {
+public class ModelZCSoftvera {
 
-	public int id;
-
-	public int oznaka;
+	public int id;	
 	
 	public String naziv;
 
@@ -23,14 +21,6 @@ public class ModelZcSoftvera {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getOznaka() {
-		return oznaka;
-	}
-
-	public void setOznaka(int oznaka) {
-		this.oznaka = oznaka;
 	}
 
 	public String getNaziv() {
@@ -65,24 +55,23 @@ public class ModelZcSoftvera {
 		this.strukturaModela = strukturaModela;
 	}*/
 
-	public ModelZcSoftvera(int id, int oznaka, String naziv,
+	public ModelZCSoftvera(int id, String naziv,
 			String skraceniNaziv, String opis,
 			List<StrukturaModela> strukturaModela) {
 		super();
 		this.id = id;
-		this.oznaka = oznaka;
 		this.naziv = naziv;
 		this.skraceniNaziv = skraceniNaziv;
 		this.opis = opis;
 		//this.strukturaModela = strukturaModela;
 	}
 
-	public ModelZcSoftvera(int id) {
+	public ModelZCSoftvera(int id) {
 		super();
 		this.id = id;
 	}
 
-	public ModelZcSoftvera() {
+	public ModelZCSoftvera() {
 		super();
 	}
 	

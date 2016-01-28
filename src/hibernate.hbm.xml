@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="model.ModelZCSoftvera" table="ModelZCSoftvera">
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="naziv" type="string" column="naziv" not-null="true" />
+		<property name="skraceniNaziv" type="string" column="skraceni_naziv" />
+		<property name="opis" type="string" column="opis" />
+	</class>
+
+	<class name="model.Faza" table="Faze">
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="nazivFaze" column="naziv" type="string"
+			not-null="true" />
+	</class>
+
+	<class name="model.Korak" table="Koraci">
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="naziv" column="naziv" type="string" not-null="true" />
+		<many-to-one name="faza" column="faza" class="model.Faza"
+			not-null="true" />
+	</class>
+
+	<class name="model.StrukturaModela" table="StrukturaModela">
+		<id name="id" type="int" column="id">
+			<generator class="increment" />
+		</id>
+		<property name="nivo" type="int" column="nivo" />
+		<property name="polozajUNivou" type="int" column="polozaj" />
+		<many-to-one name="model" column="model_zc" class="model.ModelZCSoftvera"
+			not-null="true" />
+		<many-to-one name="korak" column="korak" class="model.Korak"
+			not-null="true" />
+		<set name="struktureModela" cascade="save-update" table="Hiperlinkovi">
+			<key column="id" />
+			<many-to-many column="strukture" class="model.StrukturaModela" />
+		</set>
+	</class>
+
+</hibernate-mapping>

@@ -1,1 +1,6 @@
 /bin
+/lib
+baza.h2.db
+baza.lock.db
+baza.trace.db
+

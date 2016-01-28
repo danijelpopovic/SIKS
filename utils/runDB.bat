@@ -1,1 +1,0 @@
-java -cp "C:\Users\Pop\Desktop\SIKS - Standardizacija i hvalitet softvera\workspace\SIKS_tim2\lib\h2-1.4.185.jar" org.h2.tools.Server -web -tcp -tcpSSL -baseDir "C:\Users\Pop\Desktop\SIKS - Standardizacija i hvalitet softvera\workspace\SIKS_tim2\db\h2"

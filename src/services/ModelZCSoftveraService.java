@@ -5,21 +5,20 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import model.ModelZcSoftvera;
+import model.ModelZCSoftvera;
 
-public class ModelZcSoftveraService {
+public class ModelZCSoftveraService {
 	protected EntityManager em;
 
-	public ModelZcSoftveraService(EntityManager em) {
+	public ModelZCSoftveraService(EntityManager em) {
 		this.em = em;
 	}
 
-	public ModelZcSoftvera createModelZcSoftvera(int id, int oznaka,
+	public ModelZCSoftvera createModelZcSoftvera(int id,
 			String naziv, String skraceniNaziv, String opis) {
-		ModelZcSoftvera emp = new ModelZcSoftvera(id);
+		ModelZCSoftvera emp = new ModelZCSoftvera(id);
 		emp.setNaziv(naziv);
 		emp.setOpis(opis);
-		emp.setOznaka(oznaka);
 		emp.setSkraceniNaziv(skraceniNaziv);
 		//emp.setStrukturaModela(strukturaModela);
 		em.persist(emp);
@@ -28,19 +27,19 @@ public class ModelZcSoftveraService {
 	}
 
 	public void removeProfessor(int id) {
-		ModelZcSoftvera emp = findModelZcSoftvera(id);
+		ModelZCSoftvera emp = findModelZcSoftvera(id);
 		if (emp != null) {
 			em.remove(emp);
 		}
 	}
 
-	public ModelZcSoftvera findModelZcSoftvera(int id) {
-		return em.find(ModelZcSoftvera.class, id);
+	public ModelZCSoftvera findModelZcSoftvera(int id) {
+		return em.find(ModelZCSoftvera.class, id);
 	}
 
 	@SuppressWarnings("unchecked")
-	public Collection<ModelZcSoftvera> findAllModelZcSoftvera() {
+	public Collection<ModelZCSoftvera> findAllModelZcSoftvera() {
 		Query query = em.createQuery("SELECT e FROM ModelZcSoftvera e");
-		return (Collection<ModelZcSoftvera>) query.getResultList();
+		return (Collection<ModelZCSoftvera>) query.getResultList();
 	}
 }
