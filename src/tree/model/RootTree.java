@@ -1,21 +1,36 @@
 package tree.model;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.swing.tree.TreeNode;
 
+import model.ModelZCSoftvera;
+
 public class RootTree implements TreeNode{
+
+	
+	private ArrayList<ModelZCSoftvera> modelZCSoftveras = new ArrayList<ModelZCSoftvera>();
+	private ArrayList<String> list = new ArrayList<String>();
+	
+	public RootTree() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public String toString() {
+		return "Modeli ZC softvera";
+	}
 
 	@Override
 	public TreeNode getChildAt(int childIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		return (TreeNode) getModelZCSoftverasIndex(childIndex);
 	}
 
 	@Override
 	public int getChildCount() {
 		// TODO Auto-generated method stub
-		return 0;
+		return modelZCSoftveras.size();
 	}
 
 	@Override
@@ -26,14 +41,13 @@ public class RootTree implements TreeNode{
 
 	@Override
 	public int getIndex(TreeNode node) {
-		// TODO Auto-generated method stub
-		return 0;
+		return getModelZCSoftverasIndex((ModelZCSoftvera)node);		
 	}
 
 	@Override
 	public boolean getAllowsChildren() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -43,10 +57,32 @@ public class RootTree implements TreeNode{
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Override
 	public Enumeration children() {
-		// TODO Auto-generated method stub
-		return null;
+		return ((Enumeration<ModelZCSoftvera>) modelZCSoftveras);
 	}
 
+	public ArrayList<ModelZCSoftvera> getModelZCSoftveras() {
+		return modelZCSoftveras;
+	}
+
+	public void setModelZCSoftveras(ArrayList<ModelZCSoftvera> modelZCSoftveras) {
+		this.modelZCSoftveras = modelZCSoftveras;
+	}
+
+	
+	public int getModelZCSoftverasIndex(ModelZCSoftvera modelZCSoftvera) {
+		return modelZCSoftveras.indexOf(modelZCSoftvera);
+	}
+
+	public ModelZCSoftvera getModelZCSoftverasIndex(int index) {
+		return modelZCSoftveras.get(index);
+	}
+	
+	public void addModelZCSoftvera(ModelZCSoftvera modelZCSoftvera){
+		modelZCSoftveras.add(modelZCSoftvera);
+	}
+	
+	public void addTest(String a){
+		list.add(a);
+	}
 }

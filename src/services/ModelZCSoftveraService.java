@@ -39,7 +39,7 @@ public class ModelZCSoftveraService {
 
 	@SuppressWarnings("unchecked")
 	public Collection<ModelZCSoftvera> findAllModelZcSoftvera() {
-		Query query = em.createQuery("SELECT e FROM ModelZcSoftvera e");
+		Query query = em.createQuery("SELECT e FROM ModelZCSoftvera e");
 		return (Collection<ModelZCSoftvera>) query.getResultList();
 	}
 }

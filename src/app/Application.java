@@ -23,7 +23,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		try {
+		/*try {
 
 			JPAUtil util = new JPAUtil();
 
@@ -62,7 +62,7 @@ public class Application {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		// DBConnection.getConnection();
 

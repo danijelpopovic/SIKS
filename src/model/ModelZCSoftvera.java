@@ -72,7 +72,12 @@ public class ModelZCSoftvera {
 	}
 
 	public ModelZCSoftvera() {
-		super();
+		
+	}
+
+	@Override
+	public String toString() {
+		return naziv;
 	}
 	
 	
