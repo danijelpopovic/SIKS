@@ -1,23 +1,7 @@
 package app;
 
 import gui.MainFrame;
-
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import model.Faza;
-import model.Korak;
-import model.ModelZCSoftvera;
-import model.StrukturaModela;
-import services.FazaService;
-import services.KorakService;
-import services.ModelZCSoftveraService;
-import services.StrukturaModelaService;
-import util.JPAUtil;
+import util.DrawGraph;
 
 public class Application {
 
@@ -65,6 +49,9 @@ public class Application {
 		}*/
 
 		// DBConnection.getConnection();
+		
+		DrawGraph draw = new DrawGraph();
+		draw.draw();
 
 		try {
 			MainFrame mf = MainFrame.getInstance();
