@@ -1,7 +1,15 @@
 package tree.view;
 
+import gui.MainFrame;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.TreePath;
 
 import model.Faza;
 import model.Korak;
@@ -10,7 +18,7 @@ import tree.controller.TreeController;
 import tree.model.RootTreeModel;
 
 @SuppressWarnings("serial")
-public class TreeView extends JTree{
+public class TreeView extends JTree implements TreeSelectionListener{
 
 	public TreeView(){
 		addMouseListener(new TreeController());
@@ -32,6 +40,13 @@ public class TreeView extends JTree{
 		((RootTreeModel)getModel()).addKorak(k);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
+
+	@Override
+	public void valueChanged(TreeSelectionEvent e) {
+		System.out.println("123");
+		
+	}
+
 	
 }
 

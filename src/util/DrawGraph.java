@@ -21,6 +21,8 @@ public class DrawGraph
 	{
 		GraphViz gv = new GraphViz();
 		gv.addln(gv.start_graph());
+		gv.addln("style=filled; color=grey;");
+		gv.addln(" label = <process #1>;");		
 		gv.addln("A"+counter+" -> B"+counter+";");
 		gv.addln("B"+counter+" -> C"+counter+";");
 		

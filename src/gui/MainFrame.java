@@ -239,6 +239,14 @@ public class MainFrame extends JFrame {
 	public static void setDraw(DrawGraph draw) {
 		MainFrame.draw = draw;
 	}
+
+	public TreeView getTreeView() {
+		return treeView;
+	}
+
+	public void setTreeView(TreeView treeView) {
+		this.treeView = treeView;
+	}
 	
 	
 }
