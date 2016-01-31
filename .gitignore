@@ -7,3 +7,6 @@ baza.trace.db
 baza.lock.db
 *.db
 *.db
+baza.h2.db
+*.db
+GraphViz/graph.png
