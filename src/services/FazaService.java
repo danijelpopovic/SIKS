@@ -37,7 +37,7 @@ public class FazaService {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Faza> findAllFaze() {
-		Query query = em.createQuery("SELECT e FROM Faze e");
+		Query query = em.createQuery("SELECT e FROM Faza e");
 		return (Collection<Faza>) query.getResultList();
 	}
 

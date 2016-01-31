@@ -1,7 +1,9 @@
 package model;
 
+import javax.swing.tree.DefaultMutableTreeNode;
 
-public class Korak {
+
+public class Korak extends DefaultMutableTreeNode{
 
 	public int id;
 
@@ -49,4 +51,10 @@ public class Korak {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return naziv;
+	}
+
+	
 }

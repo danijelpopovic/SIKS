@@ -1,9 +1,18 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.Vector;
+
+import javax.swing.tree.DefaultMutableTreeNode;
 
 
-public class ModelZCSoftvera {
+
+
+public class ModelZCSoftvera extends DefaultMutableTreeNode{
 
 	public int id;	
 	
@@ -13,7 +22,7 @@ public class ModelZCSoftvera {
 
 	public String opis;
 
-	public List<StrukturaModela> strukturaModela;
+	public Set<StrukturaModela> strukturaModela = new HashSet<StrukturaModela>(0);
 
 	public int getId() {
 		return id;
@@ -47,13 +56,15 @@ public class ModelZCSoftvera {
 		this.opis = opis;
 	}
 
-	/*public List<StrukturaModela> getStrukturaModela() {
+	
+
+	public Set<StrukturaModela> getStrukturaModela() {
 		return strukturaModela;
 	}
 
-	public void setStrukturaModela(List<StrukturaModela> strukturaModela) {
+	public void setStrukturaModela(Set<StrukturaModela> strukturaModela) {
 		this.strukturaModela = strukturaModela;
-	}*/
+	}
 
 	public ModelZCSoftvera(int id, String naziv,
 			String skraceniNaziv, String opis,
@@ -80,6 +91,20 @@ public class ModelZCSoftvera {
 		return naziv;
 	}
 	
-	
+	public Enumeration<Faza> children() {
+		// TODO Auto-generated method stub
+		Enumeration<Faza> en;
+		Vector<Faza> d = new Vector<Faza>();
+		
+		List<Faza> fs = new ArrayList<Faza>();
+		Faza f1 = new Faza();
+		f1.setNazivFaze("faza 2");
+		fs.add(f1);
+		for(int i = 0; i < fs.size(); i++){
+			d.add(fs.get(i));
+		}
+		en = d.elements();
+		return en;
+	}
 
 }

@@ -12,14 +12,31 @@
 		<property name="naziv" type="string" column="naziv" not-null="true" />
 		<property name="skraceniNaziv" type="string" column="skraceni_naziv" />
 		<property name="opis" type="string" column="opis" />
+		<set name="strukturaModela" table="StrukturaModela" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="model_zc" not-null="true" />
+            </key>
+            <one-to-many class="model.StrukturaModela" />
+        </set>
 	</class>
 
 	<class name="model.Faza" table="Faze">
 		<id name="id" type="int" column="id">
 			<generator class="increment" />
 		</id>
+		
 		<property name="nazivFaze" column="naziv" type="string"
 			not-null="true" />
+			
+		<set name="koraci" table="Koraci" 
+			inverse="true" lazy="true" fetch="select">
+           <key>
+               <column name="faza" not-null="true" />
+           </key>
+           <one-to-many class="model.Korak" />
+        </set>
+        
 	</class>
 
 	<class name="model.Korak" table="Koraci">

@@ -1,11 +1,18 @@
 package model;
 
+import java.util.HashSet;
+import java.util.Set;
 
-public class Faza {
+import javax.swing.tree.DefaultMutableTreeNode;
+
+
+public class Faza extends DefaultMutableTreeNode{
 
 	public int id;
 
 	public String nazivFaze;
+	
+	public Set<Korak> koraci = new HashSet<Korak>(0);
 
 	public int getId() {
 		return id;
@@ -38,5 +45,19 @@ public class Faza {
 		super();
 	}
 
+	@Override
+	public String toString() {
+		return nazivFaze;
+	}
+
+	public Set<Korak> getKoraci() {
+		return koraci;
+	}
+
+	public void setKoraci(Set<Korak> koraci) {
+		this.koraci = koraci;
+	}
+
+	
 
 }

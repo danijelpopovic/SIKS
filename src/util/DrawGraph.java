@@ -11,6 +11,8 @@ public class DrawGraph
 //		p.start2();
 	}*/
 
+	public static int counter = 0;
+	
 	/**
 	 * Construct a DOT graph in memory, convert it
 	 * to image and store the image in the file system.
@@ -19,8 +21,11 @@ public class DrawGraph
 	{
 		GraphViz gv = new GraphViz();
 		gv.addln(gv.start_graph());
-		gv.addln("A -> B;");
-		gv.addln("B -> C;");
+		gv.addln("A"+counter+" -> B"+counter+";");
+		gv.addln("B"+counter+" -> C"+counter+";");
+		
+		//test
+		counter++;
 		
 		
 		gv.addln(gv.end_graph());
@@ -53,7 +58,7 @@ public class DrawGraph
 	 * Read the DOT source from a file,
 	 * convert to image and store the image in the file system.
 	 */
-	private void start2()
+	/*private void start2()
 	{
 		//String dir = "/home/jabba/Dropbox/git.projects/laszlo.own/graphviz-java-api";     // Linux
 		//String input = dir + "/sample/simple.dot";
@@ -83,5 +88,5 @@ public class DrawGraph
 		//File out = new File("/tmp/simple." + type);   // Linux
 		File out = new File("D:\\Master\\SiKS\\Za SiKS\\graphviz-java-api-master\\tmp\\simple." + type);   // Windows
 		gv.writeGraphToFile( gv.getGraph(gv.getDotSource(), type, repesentationType), out );
-	}
+	}*/
 }

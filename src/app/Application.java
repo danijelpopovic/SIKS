@@ -50,11 +50,10 @@ public class Application {
 
 		// DBConnection.getConnection();
 		
-		DrawGraph draw = new DrawGraph();
-		draw.draw();
 
 		try {
 			MainFrame mf = MainFrame.getInstance();
+			
 			mf.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();

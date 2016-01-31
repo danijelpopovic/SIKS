@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -16,16 +17,21 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
+import model.Faza;
+import model.Korak;
 import model.ModelZCSoftvera;
 import model.StrukturaModela;
+import services.FazaService;
 import services.ModelZCSoftveraService;
-<<<<<<< HEAD
 import services.StrukturaModelaService;
-=======
->>>>>>> 817de92204a4a17ff714bb14b2dab92493ffe45c
+import tree.model.RootTree;
 import tree.model.RootTreeModel;
 import tree.view.TreeView;
+import util.DrawGraph;
 import util.JPAUtil;
 
 public class MainFrame extends JFrame {
@@ -38,10 +44,14 @@ public class MainFrame extends JFrame {
 	public static int init = 0;
 	private JPanel treePanel = new JPanel();
 	private JPanel graphPanel = new JPanel();
+	private JPanel panel = new JPanel();
 
-	public static EntityManagerFactory emf;// =
-											// Persistence.createEntityManagerFactory("SIKS");
-	public static EntityManager em;// = emf.createEntityManager();
+	private static DrawGraph draw = new DrawGraph();
+
+	
+	public static EntityManagerFactory emf;
+	
+	public static EntityManager em;
 
 	private TreeView treeView;
 
@@ -77,51 +87,84 @@ public class MainFrame extends JFrame {
 		treePanel.setLayout(new BorderLayout());
 		getContentPane().add(treePanel, BorderLayout.WEST);		
 		
-		BufferedImage graph;
-		File png = new File("GraphViz/graph.png");
-		try {
-			graph = ImageIO.read(png);
-			JLabel graphLabel = new JLabel(new ImageIcon(graph));
-			graphPanel.add(graphLabel);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
-		treePanel.add(graphPanel, BorderLayout.EAST);
+		
+		
 		
 		/*graphPanel.setPreferredSize(new Dimension(225, 600));
 		graphPanel.setLayout(new BorderLayout());
 		getContentPane().add(graphPanel, BorderLayout.EAST);*/		
 
 		initTree();
+		
+		this.add(panel, BorderLayout.CENTER);
 	}
 
 	public void initTree() {
 
-		RootTreeModel root = new RootTreeModel();
+		DefaultTreeModel root = new RootTreeModel();
 		treeView = new TreeView();
 
+		treeView.setModel(root);
+		
 		ModelZCSoftveraService mzcss = new ModelZCSoftveraService(getEm());
-<<<<<<< HEAD
 		StrukturaModelaService sms = new StrukturaModelaService(getEm());
+		FazaService fs = new FazaService(getEm());
 		
 		List<ModelZCSoftvera> modelZCSoftveras  = (List<ModelZCSoftvera>) mzcss.findAllModelZcSoftvera();
 		List<StrukturaModela> struktureModela = (List<StrukturaModela>) sms.findAllStrukturaModela();
-		
-		for(ModelZCSoftvera modelZCSoftvera : modelZCSoftveras){
-=======
-
-		List<ModelZCSoftvera> modelZCSoftveras = (List<ModelZCSoftvera>) mzcss
-				.findAllModelZcSoftvera();
+		List<Faza> faze = (List<Faza>) fs.findAllFaze();
 
 		for (ModelZCSoftvera modelZCSoftvera : modelZCSoftveras) {
->>>>>>> 817de92204a4a17ff714bb14b2dab92493ffe45c
-			root.addModelZCSoftvera(modelZCSoftvera);
+
+			treeView.AddModelZC(modelZCSoftvera);
+			
+			
+			DefaultMutableTreeNode dNode,child;
+			RootTreeModel a = (RootTreeModel)root;
+		
+			//Enumeration<DefaultMutableTreeNode> en = ((DefaultMutableTreeNode)a.getChild(root, 0)).breadthFirstEnumeration();
+			
+		
+				
+					for(StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()){
+						for(Faza f : faze){
+							if(struktura.getKorak().getFaza().id==f.id){
+								System.out.println(f.getNazivFaze());
+								modelZCSoftvera.add(f);
+								if(f.getKoraci()!=null && f.getKoraci().size()>0){
+									for(Korak k: f.getKoraci()){
+										f.add(k);
+									}
+								}
+									
+							}
+						}
+					
+				}
 			
 		}
+			
+			
+			/*for(StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()){
+				for(Faza f : faze){
+					if(struktura.getKorak().getFaza().id==f.id){
+						System.out.println(f.getNazivFaze());
+						
+						
+						
+						((RootTreeModel)root).addFaza(f);
+						
+					}
+				}
+			}
+			
+			
+		}*/
+		
+		
 
-		treeView.setModel(root);
+		
 		JScrollPane scrollPane = new JScrollPane(treeView);
 		treePanel.add(scrollPane, BorderLayout.CENTER);
 
@@ -154,5 +197,48 @@ public class MainFrame extends JFrame {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
+	
+	public void addGraph(){
+		BufferedImage graph;
+		File png = new File("GraphViz/graph.png");
+		try {
+			
+			
+			graph = ImageIO.read(png);
+			JLabel graphLabel = new JLabel(new ImageIcon(graph));
+			graphPanel.removeAll();
+			
+			getDraw().draw();
+			
+			graphPanel.add(graphLabel);
+			
+			
+			this.getPanel().removeAll();
+			panel.add(graphPanel, BorderLayout.EAST);
+			panel.updateUI();
+			//SwingUtilities.invokeLater(null);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
+	
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public void setPanel(JPanel panel) {
+		this.panel = panel;
+	}
+
+	public static DrawGraph getDraw() {
+		return draw;
+	}
+
+	public static void setDraw(DrawGraph draw) {
+		MainFrame.draw = draw;
+	}
+	
+	
 }

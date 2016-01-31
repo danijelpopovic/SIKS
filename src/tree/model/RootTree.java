@@ -3,15 +3,17 @@ package tree.model;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
+import model.Faza;
 import model.ModelZCSoftvera;
 
 public class RootTree implements TreeNode{
 
 	
 	private ArrayList<ModelZCSoftvera> modelZCSoftveras = new ArrayList<ModelZCSoftvera>();
-	private ArrayList<String> list = new ArrayList<String>();
+	
 	
 	public RootTree() {
 		super();
@@ -22,45 +24,16 @@ public class RootTree implements TreeNode{
 		return "Modeli ZC softvera";
 	}
 
-	@Override
-	public TreeNode getChildAt(int childIndex) {
-		return (TreeNode) getModelZCSoftverasIndex(childIndex);
+	public void addModelZCSoftvera(ModelZCSoftvera model){
+		modelZCSoftveras.add(model);
 	}
-
-	@Override
-	public int getChildCount() {
-		// TODO Auto-generated method stub
-		return modelZCSoftveras.size();
-	}
-
-	@Override
-	public TreeNode getParent() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int getIndex(TreeNode node) {
-		return getModelZCSoftverasIndex((ModelZCSoftvera)node);		
-	}
-
-	@Override
-	public boolean getAllowsChildren() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isLeaf() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public Enumeration children() {
+	
+/*	@SuppressWarnings("rawtypes")
+	public Enumeration<ModelZCSoftvera> children() {
+		
 		return ((Enumeration<ModelZCSoftvera>) modelZCSoftveras);
 	}
-
+*/
 	public ArrayList<ModelZCSoftvera> getModelZCSoftveras() {
 		return modelZCSoftveras;
 	}
@@ -78,11 +51,49 @@ public class RootTree implements TreeNode{
 		return modelZCSoftveras.get(index);
 	}
 	
-	public void addModelZCSoftvera(ModelZCSoftvera modelZCSoftvera){
-		modelZCSoftveras.add(modelZCSoftvera);
-	}
 	
-	public void addTest(String a){
-		list.add(a);
+	@Override
+	public TreeNode getChildAt(int childIndex) {
+		// TODO Auto-generated method stub
+		return getModelZCSoftverasIndex(childIndex);
 	}
+
+	@Override
+	public int getChildCount() {
+		// TODO Auto-generated method stub
+		return getModelZCSoftveras().size();
+	}
+
+	@Override
+	public TreeNode getParent() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int getIndex(TreeNode node) {
+		// TODO Auto-generated method stub
+		return getModelZCSoftverasIndex((ModelZCSoftvera)node);
+	}
+
+	@Override
+	public boolean getAllowsChildren() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean isLeaf() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public Enumeration<Faza> children() {
+		// TODO Auto-generated method stub
+		return (Enumeration<Faza>)modelZCSoftveras;
+	}
+
+	
+	
 }
