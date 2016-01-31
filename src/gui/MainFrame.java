@@ -203,15 +203,12 @@ public class MainFrame extends JFrame {
 		File png = new File("GraphViz/graph.png");
 		try {
 			
-			
+			getDraw().draw();
 			graph = ImageIO.read(png);
 			JLabel graphLabel = new JLabel(new ImageIcon(graph));
-			graphPanel.removeAll();
+			graphPanel.removeAll();			
 			
-			getDraw().draw();
-			
-			graphPanel.add(graphLabel);
-			
+			graphPanel.add(graphLabel);		
 			
 			this.getPanel().removeAll();
 			panel.add(graphPanel, BorderLayout.EAST);
