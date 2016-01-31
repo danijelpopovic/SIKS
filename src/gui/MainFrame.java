@@ -12,8 +12,9 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import model.ModelZCSoftvera;
+import model.StrukturaModela;
 import services.ModelZCSoftveraService;
-import tree.controller.TreeBuilder;
+import services.StrukturaModelaService;
 import tree.model.RootTreeModel;
 import tree.view.TreeView;
 import util.JPAUtil;
@@ -83,12 +84,14 @@ public class MainFrame extends JFrame {
 		
 		
 		ModelZCSoftveraService mzcss = new ModelZCSoftveraService(getEm());
+		StrukturaModelaService sms = new StrukturaModelaService(getEm());
 		
 		List<ModelZCSoftvera> modelZCSoftveras  = (List<ModelZCSoftvera>) mzcss.findAllModelZcSoftvera();
-		
+		List<StrukturaModela> struktureModela = (List<StrukturaModela>) sms.findAllStrukturaModela();
 		
 		for(ModelZCSoftvera modelZCSoftvera : modelZCSoftveras){
 			root.addModelZCSoftvera(modelZCSoftvera);
+			
 		}
 		
 		treeView.setModel(root);

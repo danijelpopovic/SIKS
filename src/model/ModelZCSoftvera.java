@@ -13,7 +13,7 @@ public class ModelZCSoftvera {
 
 	public String opis;
 
-	//public List<StrukturaModela> strukturaModela;
+	public List<StrukturaModela> strukturaModela;
 
 	public int getId() {
 		return id;
