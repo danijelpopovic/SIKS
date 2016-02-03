@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -130,7 +131,7 @@ public class MainFrame extends JFrame {
 					for(StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()){
 						for(Faza f : faze){
 							if(struktura.getKorak().getFaza().id==f.id){
-								System.out.println(f.getNazivFaze());
+								//System.out.println(f.getNazivFaze());
 								modelZCSoftvera.add(f);
 								if(f.getKoraci()!=null && f.getKoraci().size()>0){
 									for(Korak k: f.getKoraci()){
@@ -203,9 +204,10 @@ public class MainFrame extends JFrame {
 		File png = new File("GraphViz/graph.png");
 		try {
 			
-			getDraw().draw();
+			//getDraw().draw();
 			graph = ImageIO.read(png);
 			JLabel graphLabel = new JLabel(new ImageIcon(graph));
+			panel.setBackground(Color.WHITE);
 			graphPanel.removeAll();			
 			
 			graphPanel.add(graphLabel);		
