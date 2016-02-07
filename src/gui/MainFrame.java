@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -29,11 +28,11 @@ import model.StrukturaModela;
 import services.FazaService;
 import services.ModelZCSoftveraService;
 import services.StrukturaModelaService;
-import tree.model.RootTree;
 import tree.model.RootTreeModel;
 import tree.view.TreeView;
 import util.DrawGraph;
 import util.JPAUtil;
+import actions.ActionManager;
 
 public class MainFrame extends JFrame {
 
@@ -49,6 +48,11 @@ public class MainFrame extends JFrame {
 
 	private static DrawGraph draw = new DrawGraph();
 
+	public static enum ActionType {KORAK, FAZA, MODEL};
+	
+	private ActionType actionType; 
+	
+	public ActionManager actionManager;
 	
 	public static EntityManagerFactory emf;
 	
@@ -68,6 +72,7 @@ public class MainFrame extends JFrame {
 	private MainFrame() {
 		super();
 		
+		actionManager = new ActionManager();
 
 		try {
 			JPAUtil util = new JPAUtil();
@@ -103,6 +108,25 @@ public class MainFrame extends JFrame {
 
 	public void initTree() {
 
+		updateTree();
+		JScrollPane scrollPane = new JScrollPane(treeView);
+		treePanel.add(scrollPane, BorderLayout.CENTER);
+
+		/*
+		 * DefaultMutableTreeNode rootNode = new
+		 * DefaultMutableTreeNode("Root Node"); DefaultTreeModel treeModel = new
+		 * DefaultTreeModel(rootNode); //treeModel.addTreeModelListener(new
+		 * MyTreeModelListener());
+		 * 
+		 * JTree tree = new JTree(treeModel); tree.setEditable(true);
+		 * tree.getSelectionModel().setSelectionMode
+		 * (TreeSelectionModel.SINGLE_TREE_SELECTION);
+		 * tree.setShowsRootHandles(true); treePanel.add(tree,
+		 * BorderLayout.CENTER);
+		 */
+	}
+	
+	public void updateTree(){
 		DefaultTreeModel root = new RootTreeModel();
 		treeView = new TreeView();
 
@@ -145,42 +169,8 @@ public class MainFrame extends JFrame {
 				}
 			
 		}
-			
-			
-			/*for(StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()){
-				for(Faza f : faze){
-					if(struktura.getKorak().getFaza().id==f.id){
-						System.out.println(f.getNazivFaze());
-						
-						
-						
-						((RootTreeModel)root).addFaza(f);
-						
-					}
-				}
-			}
-			
-			
-		}*/
 		
 		
-
-		
-		JScrollPane scrollPane = new JScrollPane(treeView);
-		treePanel.add(scrollPane, BorderLayout.CENTER);
-
-		/*
-		 * DefaultMutableTreeNode rootNode = new
-		 * DefaultMutableTreeNode("Root Node"); DefaultTreeModel treeModel = new
-		 * DefaultTreeModel(rootNode); //treeModel.addTreeModelListener(new
-		 * MyTreeModelListener());
-		 * 
-		 * JTree tree = new JTree(treeModel); tree.setEditable(true);
-		 * tree.getSelectionModel().setSelectionMode
-		 * (TreeSelectionModel.SINGLE_TREE_SELECTION);
-		 * tree.setShowsRootHandles(true); treePanel.add(tree,
-		 * BorderLayout.CENTER);
-		 */
 	}
 
 	public static EntityManagerFactory getEmf() {
@@ -191,7 +181,7 @@ public class MainFrame extends JFrame {
 		this.emf = emf;
 	}
 
-	public static EntityManager getEm() {
+	public EntityManager getEm() {
 		return em;
 	}
 
@@ -246,6 +236,23 @@ public class MainFrame extends JFrame {
 	public void setTreeView(TreeView treeView) {
 		this.treeView = treeView;
 	}
+
+	public ActionType getActionType() {
+		return actionType;
+	}
+
+	public void setActionType(ActionType actionType) {
+		this.actionType = actionType;
+	}
+
+	public ActionManager getActionManager() {
+		return actionManager;
+	}
+
+	public void setActionManager(ActionManager actionManager) {
+		this.actionManager = actionManager;
+	}
+	
 	
 	
 }

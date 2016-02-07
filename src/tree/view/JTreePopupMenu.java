@@ -1,5 +1,7 @@
 package tree.view;
 
+import gui.MainFrame;
+
 import java.awt.Component;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -12,7 +14,6 @@ import javax.swing.JPopupMenu;
 public class JTreePopupMenu{
 
 	private JPopupMenu popupMenu;
-	
 	JMenuItem addFaza;
 	JMenuItem addKorak;
 	JMenuItem addModelZC;
@@ -21,8 +22,10 @@ public class JTreePopupMenu{
 	JMenuItem removeKorak;
 	JMenuItem removeModelZC;
 	
+	
+	
 	public JTreePopupMenu(){
-		addFaza = new JMenuItem("Dodaj fazu");
+		addFaza = new JMenuItem(MainFrame.getInstance().getActionManager().getAddNewFaza());
 		addKorak = new JMenuItem("Dodaj korak");
 		
 		addModelZC = new JMenuItem("Dodaj novi model");
@@ -106,6 +109,8 @@ public class JTreePopupMenu{
 	public void show(Component component, int x, int y) {
 		popupMenu.show(component, x, y);
 	}
+
+	
 
 
 }
