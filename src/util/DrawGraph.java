@@ -26,8 +26,7 @@ public class DrawGraph {
 		String labelFaza = faza.getNazivFaze();
 
 		GraphViz gv = new GraphViz();
-		gv.addln(gv.start_graph());
-		gv.addln("style=filled; color=grey;");
+		gv.addln(gv.start_graph());		
 		gv.addln(" label = <" + labelFaza + ">;");
 
 		Set<Korak> koraci = faza.getKoraci();
@@ -44,13 +43,15 @@ public class DrawGraph {
 
 		if (naziviKoraka.size() > 1) {
 			for (int i = 0; i < naziviKoraka.size() - 1; i++) {
-				node = naziviKoraka.get(i).replaceAll("\\s", "");
-				node1 = naziviKoraka.get(i + 1).replaceAll("\\s", "");
-				gv.addln(node + " -> " + node1);
+				node = naziviKoraka.get(i).replaceAll("\\s", "_");
+				node1 = naziviKoraka.get(i + 1).replaceAll("\\s", "_");
+				gv.addln(node + "[style = filled; color = red; fontcolor = red; shape = mcircle; fillcolor = green]");
+				gv.addln(node1 + "[style = filled; color = blue; fontcolor = blue; shape = mcircle; fillcolor = orange]");
+				gv.addln(node + " ->  " + node1);
 			}
 		} else if (naziviKoraka.size() == 1) {
 			gv.addln(naziviKoraka.get(naziviKoraka.size() - 1).replaceAll(
-					"\\s", ""));
+					"\\s", "_"));
 		} else {
 			gv.addln("Prazan cvor");
 		}
@@ -96,8 +97,7 @@ public class DrawGraph {
 		}
 
 		GraphViz gv = new GraphViz();
-		gv.addln(gv.start_graph());
-		gv.addln("style=filled; color=grey;");
+		gv.addln(gv.start_graph());		
 		gv.addln(" label = <" + labelModel + ">;");
 
 		String node = "";
@@ -111,12 +111,14 @@ public class DrawGraph {
 
 		if (nazivi.size() > 1) {
 			for (int i = 0; i < nazivi.size() - 1; i++) {
-				node = nazivi.get(i).replaceAll("\\s", "");
-				node1 = nazivi.get(i + 1).replaceAll("\\s", "");
+				node = nazivi.get(i).replaceAll("\\s", "_");
+				node1 = nazivi.get(i + 1).replaceAll("\\s", "_");
+				gv.addln(node + "[style = filled; color = yellow; fontcolor = white; shape = tripleoctagon; fillcolor = violet]");
+				gv.addln(node1 + "[style = filled; color = black; fontcolor = white; shape = tripleoctagon; fillcolor = pink]");
 				gv.addln(node + " -> " + node1);
 			}
 		} else if (nazivi.size() == 1){
-			gv.addln(nazivi.get(nazivi.size()-1).replaceAll("\\s", ""));
+			gv.addln(nazivi.get(nazivi.size()-1).replaceAll("\\s", "_"));
 		} else {
 			gv.addln(" label = <Prazan model>;");
 		}
