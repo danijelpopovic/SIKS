@@ -1,20 +1,16 @@
 package model;
 
-import java.util.*;
-
 public class StrukturaModela {
 
 	public int id;
 
-	public int nivo;
-
-	public int polozajUNivou;
-
 	public ModelZCSoftvera model;
 
 	public Korak korak;
-	
-	public Set<StrukturaModela> struktureModela;
+
+	public Korak prethodni_korak;
+
+	public Korak sledeci_korak;
 
 	public int getId() {
 		return id;
@@ -22,30 +18,6 @@ public class StrukturaModela {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getNivo() {
-		return nivo;
-	}
-
-	public void setNivo(int nivo) {
-		this.nivo = nivo;
-	}
-
-	public int getPolozajUNivou() {
-		return polozajUNivou;
-	}
-
-	public void setPolozajUNivou(int polozajUNivou) {
-		this.polozajUNivou = polozajUNivou;
-	}
-
-	public Set<StrukturaModela> getStruktureModela() {
-		return struktureModela;
-	}
-
-	public void setStruktureModela(Set<StrukturaModela> struktureModela) {
-		this.struktureModela = struktureModela;
 	}
 
 	public ModelZCSoftvera getModel() {
@@ -64,25 +36,20 @@ public class StrukturaModela {
 		this.korak = korak;
 	}
 
-	public StrukturaModela(int id, int nivo, int polozajUNivou,
-			ModelZCSoftvera model, Korak korak) {
-		super();
-		this.id = id;
-		this.nivo = nivo;
-		this.polozajUNivou = polozajUNivou;
-		this.korak = korak;
-		this.model = model;
+	public Korak getPrethodni_korak() {
+		return prethodni_korak;
 	}
-	
-	public StrukturaModela(int id, int nivo, int polozajUNivou,
-			ModelZCSoftvera model, Korak korak, Set<StrukturaModela> struktureModela) {
-		super();
-		this.id = id;
-		this.nivo = nivo;
-		this.polozajUNivou = polozajUNivou;
-		this.korak = korak;
-		this.model = model;
-		this.struktureModela = struktureModela;
+
+	public void setPrethodni_korak(Korak prethodni_korak) {
+		this.prethodni_korak = prethodni_korak;
+	}
+
+	public Korak getSledeci_korak() {
+		return sledeci_korak;
+	}
+
+	public void setSledeci_korak(Korak sledeci_korak) {
+		this.sledeci_korak = sledeci_korak;
 	}
 
 	public StrukturaModela() {
@@ -92,6 +59,23 @@ public class StrukturaModela {
 	public StrukturaModela(int id) {
 		super();
 		this.id = id;
+	}
+
+	public StrukturaModela(int id, ModelZCSoftvera model, Korak korak,
+			Korak prethodni_korak, Korak sledeci_korak) {
+		super();
+		this.id = id;
+		this.model = model;
+		this.korak = korak;
+		this.prethodni_korak = prethodni_korak;
+		this.sledeci_korak = sledeci_korak;
+	}
+	
+	public StrukturaModela(int id, ModelZCSoftvera model, Korak korak) {
+		super();
+		this.id = id;
+		this.model = model;
+		this.korak = korak;
 	}
 
 }

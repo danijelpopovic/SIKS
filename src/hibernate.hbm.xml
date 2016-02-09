@@ -37,6 +37,8 @@
            <one-to-many class="model.Korak" />
         </set>
         
+        <many-to-one name="nadfaza" column="nadfaza" class="model.Faza"
+			not-null="false" />       
 	</class>
 
 	<class name="model.Korak" table="Koraci">
@@ -51,17 +53,15 @@
 	<class name="model.StrukturaModela" table="StrukturaModela">
 		<id name="id" type="int" column="id">
 			<generator class="increment" />
-		</id>
-		<property name="nivo" type="int" column="nivo" />
-		<property name="polozajUNivou" type="int" column="polozaj" />
+		</id>		
 		<many-to-one name="model" column="model_zc" class="model.ModelZCSoftvera"
 			not-null="true" />
 		<many-to-one name="korak" column="korak" class="model.Korak"
-			not-null="true" />
-		<set name="struktureModela" cascade="save-update" table="Hiperlinkovi">
-			<key column="id" />
-			<many-to-many column="strukture" class="model.StrukturaModela" />
-		</set>
+			not-null="true" />	
+		<many-to-one name="prethodni_korak" column="prethodni_korak" class="model.Korak"
+			not-null="false" />
+		<many-to-one name="sledeci_korak" column="sledeci_korak" class="model.Korak"
+			not-null="false" />	
 	</class>
 
 </hibernate-mapping>

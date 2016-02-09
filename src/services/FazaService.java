@@ -48,9 +48,6 @@ public class FazaService {
 		em.getTransaction().begin();
 		ModelZCSoftvera model = em.find(ModelZCSoftvera.class, modelId);
 		StrukturaModela struktura = new StrukturaModela(0);
-		struktura.setNivo(1);
-		struktura.setPolozajUNivou(0);
-		struktura.setStruktureModela(new HashSet<StrukturaModela>());
 		struktura.setModel(model);
 		struktura.setKorak(korak);
 		em.persist(struktura);
