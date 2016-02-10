@@ -39,7 +39,7 @@ public class TreeController implements MouseListener {
 			else if (node instanceof ModelZCSoftvera) {
 				ModelZCSoftvera model = (ModelZCSoftvera) node;
 				MainFrame.getInstance();
-				MainFrame.getDraw().drawModel(model);	
+				MainFrame.getDraw().drawModelZC(model);	
 				MainFrame.getInstance().addGraph();
 			}
 

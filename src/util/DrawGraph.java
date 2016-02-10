@@ -2,7 +2,9 @@ package util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import model.Faza;
@@ -26,7 +28,7 @@ public class DrawGraph {
 		String labelFaza = faza.getNazivFaze();
 
 		GraphViz gv = new GraphViz();
-		gv.addln(gv.start_graph());		
+		gv.addln(gv.start_graph());
 		gv.addln(" label = <" + labelFaza + ">;");
 
 		Set<Korak> koraci = faza.getKoraci();
@@ -45,8 +47,10 @@ public class DrawGraph {
 			for (int i = 0; i < naziviKoraka.size() - 1; i++) {
 				node = naziviKoraka.get(i).replaceAll("\\s", "_");
 				node1 = naziviKoraka.get(i + 1).replaceAll("\\s", "_");
-				gv.addln(node + "[style = filled; color = red; fontcolor = red; shape = mcircle; fillcolor = green]");
-				gv.addln(node1 + "[style = filled; color = blue; fontcolor = blue; shape = mcircle; fillcolor = orange]");
+				gv.addln(node
+						+ "[style = filled; color = red; fontcolor = red; shape = mcircle; fillcolor = green]");
+				gv.addln(node1
+						+ "[style = filled; color = blue; fontcolor = blue; shape = mcircle; fillcolor = orange]");
 				gv.addln(node + " ->  " + node1);
 			}
 		} else if (naziviKoraka.size() == 1) {
@@ -97,7 +101,7 @@ public class DrawGraph {
 		}
 
 		GraphViz gv = new GraphViz();
-		gv.addln(gv.start_graph());		
+		gv.addln(gv.start_graph());
 		gv.addln(" label = <" + labelModel + ">;");
 
 		String node = "";
@@ -113,12 +117,14 @@ public class DrawGraph {
 			for (int i = 0; i < nazivi.size() - 1; i++) {
 				node = nazivi.get(i).replaceAll("\\s", "_");
 				node1 = nazivi.get(i + 1).replaceAll("\\s", "_");
-				gv.addln(node + "[style = filled; color = yellow; fontcolor = white; shape = tripleoctagon; fillcolor = violet]");
-				gv.addln(node1 + "[style = filled; color = black; fontcolor = white; shape = tripleoctagon; fillcolor = pink]");
+				gv.addln(node
+						+ "[style = filled; color = yellow; fontcolor = white; shape = tripleoctagon; fillcolor = violet]");
+				gv.addln(node1
+						+ "[style = filled; color = black; fontcolor = white; shape = tripleoctagon; fillcolor = pink]");
 				gv.addln(node + " -> " + node1);
 			}
-		} else if (nazivi.size() == 1){
-			gv.addln(nazivi.get(nazivi.size()-1).replaceAll("\\s", "_"));
+		} else if (nazivi.size() == 1) {
+			gv.addln(nazivi.get(nazivi.size() - 1).replaceAll("\\s", "_"));
 		} else {
 			gv.addln(" label = <Prazan model>;");
 		}
@@ -144,6 +150,79 @@ public class DrawGraph {
 				gv.getGraph(gv.getDotSource(), type, repesentationType), out);
 	}
 
+	public void drawModelZC(ModelZCSoftvera model) {
+
+		Set<StrukturaModela> strukture = model.getStrukturaModela();
+		Map<Integer, Korak> koraci = new HashMap<Integer, Korak>();
+		String labelModel = model.getNaziv();
+
+		/*
+		 * for (StrukturaModela s : strukture) { koraci.add(s.getKorak()); }
+		 */
+
+		GraphViz gv = new GraphViz();
+		gv.addln(gv.start_graph());
+		gv.addln(" label = <" + labelModel + ">;");
+
+		StrukturaModela struktura = new StrukturaModela();
+		Korak prviKorak = new Korak();
+		Integer red = 0;
+
+		for (StrukturaModela s : strukture) {
+			if (s.getPrethodni_korak() == null) {
+				red = 1;
+				koraci.put(red, s.getKorak());
+				prviKorak = s.getSledeci_korak();
+			}
+		}
+
+		do {
+			for (StrukturaModela s1 : strukture) {
+				if (s1.getKorak() == prviKorak) {
+					red++;
+					struktura = s1;
+					koraci.put(red, struktura.getKorak());
+					prviKorak = struktura.getSledeci_korak();
+				}
+			}
+		} while (struktura.getSledeci_korak() != null);
+
+		String node = "";
+		String node1 = "";
+
+		Map<Integer, String> nazivi = new HashMap<Integer, String>();
+
+		for (int i=1; i <= koraci.size(); i++)
+			nazivi.put(i,koraci.get(i).getNaziv());
+
+		if (nazivi.size() > 1) {
+			for (int i = 1; i < nazivi.size(); i++) {
+				node = nazivi.get(i).replaceAll("\\s", "_");
+				node1 = nazivi.get(i + 1).replaceAll("\\s", "_");
+				gv.addln(node
+						+ "[style = filled; color = yellow; fontcolor = white; fillcolor = violet]");
+				gv.addln(node1
+						+ "[style = filled; color = black; fontcolor = white; fillcolor = pink]");
+				gv.addln(node + " -> " + node1);
+			}
+		} else if (nazivi.size() == 1) {
+			gv.addln(nazivi.get(nazivi.size() - 1).replaceAll("\\s", "_"));
+		} else {
+			gv.addln(" label = <Prazan model>;");
+		}
+
+		gv.addln(gv.end_graph());
+		System.out.println(gv.getDotSource());
+
+		gv.increaseDpi(); // 106 dpi
+
+		String type = "png";
+		String repesentationType = "dot";
+
+		File out = new File("GraphViz/graph." + type); // Windows
+		gv.writeGraphToFile(
+				gv.getGraph(gv.getDotSource(), type, repesentationType), out);
+	}
 	/**
 	 * Read the DOT source from a file, convert to image and store the image in
 	 * the file system.
