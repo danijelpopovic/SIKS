@@ -17,31 +17,6 @@ public class StrukturaModelaService {
 	}
 
 	public StrukturaModela createStrukturaModela(int id, ModelZCSoftvera model,
-			Korak korak, Korak prethodni_korak, Korak sledeci_korak) {
-		StrukturaModela emp = new StrukturaModela(id);
-		emp.setModel(model);
-		emp.setKorak(korak);
-		emp.setPrethodni_korak(prethodni_korak);
-		emp.setSledeci_korak(sledeci_korak);		
-
-		em.persist(emp);
-
-		return emp;
-	}
-	
-	public StrukturaModela createStrukturaModelaSamoPrethodni(int id, ModelZCSoftvera model,
-			Korak korak, Korak prethodni_korak) {
-		StrukturaModela emp = new StrukturaModela(id);
-		emp.setModel(model);
-		emp.setKorak(korak);
-		emp.setPrethodni_korak(prethodni_korak);		
-
-		em.persist(emp);
-
-		return emp;
-	}
-	
-	public StrukturaModela createStrukturaModelaSamoSledeci(int id, ModelZCSoftvera model,
 			Korak korak, Korak sledeci_korak) {
 		StrukturaModela emp = new StrukturaModela(id);
 		emp.setModel(model);
@@ -51,19 +26,7 @@ public class StrukturaModelaService {
 		em.persist(emp);
 
 		return emp;
-	}
-	
-	public StrukturaModela createStrukturaModelaSamoKorak(int id, ModelZCSoftvera model,
-			Korak korak) {
-		StrukturaModela emp = new StrukturaModela(id);
-		emp.setModel(model);
-		emp.setKorak(korak);		
-
-		em.persist(emp);
-
-		return emp;
-	}
-	
+	}	
 
 	public void removeStrukturaModela(int id) {
 		StrukturaModela emp = findStrukturaModela(id);

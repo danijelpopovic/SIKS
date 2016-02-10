@@ -58,8 +58,6 @@
 			not-null="true" />
 		<many-to-one name="korak" column="korak" class="model.Korak"
 			not-null="true" />	
-		<many-to-one name="prethodni_korak" column="prethodni_korak" class="model.Korak"
-			not-null="false" />
 		<many-to-one name="sledeci_korak" column="sledeci_korak" class="model.Korak"
 			not-null="false" />	
 	</class>

@@ -6,9 +6,7 @@ public class StrukturaModela {
 
 	public ModelZCSoftvera model;
 
-	public Korak korak;
-
-	public Korak prethodni_korak;
+	public Korak korak;	
 
 	public Korak sledeci_korak;
 
@@ -34,15 +32,7 @@ public class StrukturaModela {
 
 	public void setKorak(Korak korak) {
 		this.korak = korak;
-	}
-
-	public Korak getPrethodni_korak() {
-		return prethodni_korak;
-	}
-
-	public void setPrethodni_korak(Korak prethodni_korak) {
-		this.prethodni_korak = prethodni_korak;
-	}
+	}	
 
 	public Korak getSledeci_korak() {
 		return sledeci_korak;
@@ -62,12 +52,11 @@ public class StrukturaModela {
 	}
 
 	public StrukturaModela(int id, ModelZCSoftvera model, Korak korak,
-			Korak prethodni_korak, Korak sledeci_korak) {
+			 Korak sledeci_korak) {
 		super();
 		this.id = id;
 		this.model = model;
-		this.korak = korak;
-		this.prethodni_korak = prethodni_korak;
+		this.korak = korak;		
 		this.sledeci_korak = sledeci_korak;
 	}
 	
