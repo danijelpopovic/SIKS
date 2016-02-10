@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -45,6 +46,8 @@ public class MainFrame extends JFrame {
 	private JPanel treePanel = new JPanel();
 	private JPanel graphPanel = new JPanel();
 	private JPanel panel = new JPanel();
+	private JPanel buttonPanel = new JPanel();
+	private JButton btnSet;// = new JButton("Set");
 
 	private static DrawGraph draw = new DrawGraph();
 
@@ -93,7 +96,11 @@ public class MainFrame extends JFrame {
 		treePanel.setLayout(new BorderLayout());
 		getContentPane().add(treePanel, BorderLayout.WEST);		
 		
+		buttonPanel.setLayout(new BorderLayout());
+		btnSet = new JButton(getActionManager().getSet());
 		
+		buttonPanel.add(btnSet);
+		getContentPane().add(buttonPanel, BorderLayout.NORTH);
 		
 		
 		

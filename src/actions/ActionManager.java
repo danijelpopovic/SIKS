@@ -6,6 +6,7 @@ public class ActionManager {
 	private AddNewKorak addNewKorak;
 	private AddNewModel addNewModel;
 	private SubmitAddFaza submitAddFaza;
+	private Set set;
 	
 	public ActionManager(){
 		initialiseActions();
@@ -17,6 +18,7 @@ public class ActionManager {
 		addNewKorak = new AddNewKorak();
 		addNewModel = new AddNewModel();
 		submitAddFaza = new SubmitAddFaza();
+		set = new Set();
 	}
 
 	
@@ -51,6 +53,14 @@ public class ActionManager {
 
 	public void setSubmitAddFaza(SubmitAddFaza submitAddFaza) {
 		this.submitAddFaza = submitAddFaza;
+	}
+
+	public Set getSet() {
+		return set;
+	}
+
+	public void setSet(Set set) {
+		this.set = set;
 	}
 	
 	

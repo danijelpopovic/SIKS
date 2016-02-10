@@ -38,7 +38,7 @@ public class KorakService {
 
 	@SuppressWarnings("unchecked")
 	public Collection<Korak> findAllKoraci() {
-		Query query = em.createQuery("SELECT k FROM Koraci k");
+		Query query = em.createQuery("SELECT k FROM Korak k");
 		return (Collection<Korak>) query.getResultList();
 	}
 }
