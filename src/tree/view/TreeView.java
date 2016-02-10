@@ -1,15 +1,9 @@
 package tree.view;
 
-import gui.MainFrame;
-
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.JTree;
 import javax.swing.SwingUtilities;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
-import javax.swing.tree.TreePath;
 
 import model.Faza;
 import model.Korak;

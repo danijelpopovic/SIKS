@@ -39,7 +39,7 @@ public class TreeController implements MouseListener {
 			else if (node instanceof ModelZCSoftvera) {
 				ModelZCSoftvera model = (ModelZCSoftvera) node;
 				MainFrame.getInstance();
-				MainFrame.getDraw().drawModelDebil(model);
+				MainFrame.getDraw().drawModel(model);
 				MainFrame.getInstance().addGraph();
 			}
 
@@ -52,7 +52,6 @@ public class TreeController implements MouseListener {
 		Object node = null;
 		TreePath selPath = MainFrame.getInstance().getTreeView()
 				.getPathForLocation(e.getX(), e.getY());
-		Object pathComponent2;
 
 		if (selPath != null)
 			node = selPath.getLastPathComponent();

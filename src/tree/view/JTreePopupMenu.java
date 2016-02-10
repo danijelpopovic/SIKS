@@ -3,12 +3,9 @@ package tree.view;
 import gui.MainFrame;
 
 import java.awt.Component;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
 public class JTreePopupMenu{

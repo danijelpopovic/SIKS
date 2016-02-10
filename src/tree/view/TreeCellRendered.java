@@ -1,12 +1,9 @@
 package tree.view;
 
 import java.awt.Component;
-import java.util.ArrayList;
 
 import javax.swing.JTree;
 import javax.swing.tree.DefaultTreeCellRenderer;
-
-import model.ModelZCSoftvera;
 
 public class TreeCellRendered extends DefaultTreeCellRenderer{
 

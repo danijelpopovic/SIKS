@@ -2,16 +2,11 @@ package view;
 
 import gui.MainFrame;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-
-import net.miginfocom.swing.MigLayout;
 
 public class FazaView extends JDialog{
 

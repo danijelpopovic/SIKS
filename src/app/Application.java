@@ -1,7 +1,6 @@
 package app;
 
 import gui.MainFrame;
-import util.DrawGraph;
 
 public class Application {
 

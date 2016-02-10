@@ -1,12 +1,9 @@
 package services;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-
-import org.hibernate.mapping.List;
 
 import model.Faza;
 import model.Korak;
