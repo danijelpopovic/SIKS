@@ -1,5 +1,7 @@
 package view;
 
+import gui.MainFrame;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
@@ -26,6 +28,13 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
 import app.DualListBox;
+
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+
+import net.miginfocom.swing.MigLayout;
+
+import java.awt.FlowLayout;
 
 
 public class SetView extends JDialog {
@@ -55,6 +64,11 @@ public class SetView extends JDialog {
 	  private JButton addButton;
 
 	  private JButton removeButton;
+	  private JLabel lblFaza;
+	  private JTextField txtFaza;
+	  private JButton btnSave;
+	  private JPanel panel_1;
+	  private JButton btnCancel;
 
 	  public SetView(JFrame parent) {
 		  super(parent);
@@ -190,31 +204,33 @@ public class SetView extends JDialog {
 	  }
 
 	  private void initScreen(JFrame parent) {
-		  this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(parent);
-		  JPanel panel = new JPanel();
-		  panel.setSize(300,300);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
+		JPanel panel = new JPanel();
+		panel.setSize(300,300);
 	    panel.setBorder(BorderFactory.createEtchedBorder());
-	    panel.setLayout(new GridBagLayout());
+	    GridBagLayout gbl_panel = new GridBagLayout();
+	    gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+	    gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0};
+	    panel.setLayout(gbl_panel);
 	    sourceLabel = new JLabel(DEFAULT_SOURCE_CHOICE_LABEL);
 	    sourceListModel = new SortedListModel();
 	    sourceList = new JList(sourceListModel);
 	    panel.add(sourceLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE,
-	        EMPTY_INSETS, 0, 0));
+	        new Insets(0, 0, 5, 5), 0, 0));
 	    panel.add(new JScrollPane(sourceList), new GridBagConstraints(0, 1, 1, 5, .5,
 	        1, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-	        EMPTY_INSETS, 0, 0));
+	        new Insets(0, 0, 5, 5), 0, 0));
 
 	    addButton = new JButton(ADD_BUTTON_LABEL);
 	    panel.add(addButton, new GridBagConstraints(1, 2, 1, 2, 0, .25,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE,
-	        EMPTY_INSETS, 0, 0));
+	        new Insets(0, 0, 5, 5), 0, 0));
 	    addButton.addActionListener(new AddListener());
 	    removeButton = new JButton(REMOVE_BUTTON_LABEL);
 	    panel.add(removeButton, new GridBagConstraints(1, 4, 1, 2, 0, .25,
-	        GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(
-	            0, 5, 0, 5), 0, 0));
+	        GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 5, 5), 0, 0));
 	    removeButton.addActionListener(new RemoveListener());
 
 	    destLabel = new JLabel(DEFAULT_DEST_CHOICE_LABEL);
@@ -222,17 +238,55 @@ public class SetView extends JDialog {
 	    destList = new JList(destListModel);
 	    panel.add(destLabel, new GridBagConstraints(2, 0, 1, 1, 0, 0,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE,
-	        EMPTY_INSETS, 0, 0));
+	        new Insets(0, 0, 5, 0), 0, 0));
 	    panel.add(new JScrollPane(destList), new GridBagConstraints(2, 1, 1, 5, .5,
 	        1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-	        EMPTY_INSETS, 0, 0));
+	        new Insets(0, 0, 5, 0), 0, 0));
 	    
-	    add(panel);
+	    getContentPane().add(panel);
+	    
+	    lblFaza = new JLabel("Faza");
+	    GridBagConstraints gbc_lblFaza = new GridBagConstraints();
+	    gbc_lblFaza.anchor = GridBagConstraints.EAST;
+	    gbc_lblFaza.insets = new Insets(0, 0, 5, 5);
+	    gbc_lblFaza.gridx = 1;
+	    gbc_lblFaza.gridy = 6;
+	    panel.add(lblFaza, gbc_lblFaza);
+	    
+	    txtFaza = new JTextField();
+	    GridBagConstraints gbc_txtFaza = new GridBagConstraints();
+	    gbc_txtFaza.insets = new Insets(0, 0, 5, 0);
+	    gbc_txtFaza.fill = GridBagConstraints.HORIZONTAL;
+	    gbc_txtFaza.gridx = 2;
+	    gbc_txtFaza.gridy = 6;
+	    panel.add(txtFaza, gbc_txtFaza);
+	    txtFaza.setColumns(10);
+	    
+	    panel_1 = new JPanel();
+	    GridBagConstraints gbc_panel_1 = new GridBagConstraints();
+	    gbc_panel_1.fill = GridBagConstraints.BOTH;
+	    gbc_panel_1.gridx = 2;
+	    gbc_panel_1.gridy = 7;
+	    panel.add(panel_1, gbc_panel_1);
+	    panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+	    
+	    btnCancel = new JButton("Cancel");
+	    btnCancel.setHorizontalAlignment(SwingConstants.RIGHT);
+	    btnCancel.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent e) {
+	    	}
+	    });
+	    panel_1.add(btnCancel);
+	    
+	    btnSave = new JButton(MainFrame.getInstance().getActionManager().getSetSubmit());
+	    btnSave.setHorizontalAlignment(SwingConstants.RIGHT);
+	    panel_1.add(btnSave);
 	    pack();
+	    setLocationRelativeTo(parent);
 	    setVisible(true);
 	  }
 
-	  public static void main(String args[]) {
+	  /*public static void main(String args[]) {
 	    JFrame f = new JFrame("Dual List Box Tester");
 	    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    DualListBox dual = new DualListBox();
@@ -249,7 +303,7 @@ public class SetView extends JDialog {
 	    f.getContentPane().add(dual, BorderLayout.CENTER);
 	    f.setSize(400, 300);
 	    f.setVisible(true);
-	  }
+	  }*/
 
 	  private class AddListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
@@ -266,7 +320,33 @@ public class SetView extends JDialog {
 	      clearDestinationSelected();
 	    }
 	  }
+
+	public JList getSourceList() {
+		return sourceList;
 	}
+
+	public void setSourceList(JList sourceList) {
+		this.sourceList = sourceList;
+	}
+
+	public JList getDestList() {
+		return destList;
+	}
+
+	public void setDestList(JList destList) {
+		this.destList = destList;
+	}
+
+	public JTextField getTxtFaza() {
+		return txtFaza;
+	}
+
+	public void setTxtFaza(JTextField txtFaza) {
+		this.txtFaza = txtFaza;
+	}
+	  
+	  
+}
 
 	class SortedListModel extends AbstractListModel {
 

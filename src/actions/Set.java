@@ -3,6 +3,8 @@ package actions;
 import gui.MainFrame;
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.AbstractAction;
@@ -24,11 +26,14 @@ public class Set extends AbstractAction{
 		KorakService ks = new KorakService(MainFrame.getInstance().getEm());
 		
 		List<Korak> koraci = (List<Korak>) ks.findAllKoraci();
+		Collection koraciNazivi = new ArrayList<String>();
 		
-		
-		
-		
-		sv.addSourceElements(new String[] { "One", "Two", "Three" });
+		for(Korak k: koraci){
+			koraciNazivi.add(k.getNaziv());
+		}
+		//new String[] { "One", "Two", "Three" }
+		sv.addSourceElements(koraciNazivi.toArray());
+	
 	}
 
 }
