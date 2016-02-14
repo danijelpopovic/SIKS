@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -32,9 +33,14 @@ import app.DualListBox;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import model.ModelZCSoftvera;
 import net.miginfocom.swing.MigLayout;
 
 import java.awt.FlowLayout;
+
+import javax.swing.JComboBox;
+
+import services.ModelZCSoftveraService;
 
 
 public class SetView extends JDialog {
@@ -69,6 +75,8 @@ public class SetView extends JDialog {
 	  private JButton btnSave;
 	  private JPanel panel_1;
 	  private JButton btnCancel;
+	  private JLabel lblModel;
+	  private JComboBox cmbModel;
 
 	  public SetView(JFrame parent) {
 		  super(parent);
@@ -210,36 +218,55 @@ public class SetView extends JDialog {
 		panel.setSize(300,300);
 	    panel.setBorder(BorderFactory.createEtchedBorder());
 	    GridBagLayout gbl_panel = new GridBagLayout();
-	    gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
+	    gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0};
 	    gbl_panel.columnWeights = new double[]{0.0, 0.0, 1.0};
 	    panel.setLayout(gbl_panel);
 	    sourceLabel = new JLabel(DEFAULT_SOURCE_CHOICE_LABEL);
 	    sourceListModel = new SortedListModel();
 	    sourceList = new JList(sourceListModel);
-	    panel.add(sourceLabel, new GridBagConstraints(0, 0, 1, 1, 0, 0,
+	    
+	    lblModel = new JLabel("Model");
+	    GridBagConstraints gbc_lblModel = new GridBagConstraints();
+	    gbc_lblModel.insets = new Insets(0, 0, 5, 5);
+	    gbc_lblModel.gridx = 1;
+	    gbc_lblModel.gridy = 0;
+	    panel.add(lblModel, gbc_lblModel);
+	    
+	    cmbModel = new JComboBox();
+	    GridBagConstraints gbc_cmbModel = new GridBagConstraints();
+	    gbc_cmbModel.insets = new Insets(0, 0, 5, 0);
+	    gbc_cmbModel.fill = GridBagConstraints.HORIZONTAL;
+	    gbc_cmbModel.gridx = 2;
+	    gbc_cmbModel.gridy = 0;
+	    
+	        
+	    
+	    
+	    panel.add(cmbModel, gbc_cmbModel);
+	    panel.add(sourceLabel, new GridBagConstraints(0, 1, 1, 1, 0, 0,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE,
 	        new Insets(0, 0, 5, 5), 0, 0));
-	    panel.add(new JScrollPane(sourceList), new GridBagConstraints(0, 1, 1, 5, .5,
+	    panel.add(new JScrollPane(sourceList), new GridBagConstraints(0, 2, 1, 5, .5,
 	        1, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 	        new Insets(0, 0, 5, 5), 0, 0));
 
 	    addButton = new JButton(ADD_BUTTON_LABEL);
-	    panel.add(addButton, new GridBagConstraints(1, 2, 1, 2, 0, .25,
+	    panel.add(addButton, new GridBagConstraints(1, 3, 1, 2, 0, .25,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE,
 	        new Insets(0, 0, 5, 5), 0, 0));
 	    addButton.addActionListener(new AddListener());
 	    removeButton = new JButton(REMOVE_BUTTON_LABEL);
-	    panel.add(removeButton, new GridBagConstraints(1, 4, 1, 2, 0, .25,
+	    panel.add(removeButton, new GridBagConstraints(1, 5, 1, 2, 0, .25,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE, new Insets(0, 5, 5, 5), 0, 0));
 	    removeButton.addActionListener(new RemoveListener());
 
 	    destLabel = new JLabel(DEFAULT_DEST_CHOICE_LABEL);
 	    destListModel = new SortedListModel();
 	    destList = new JList(destListModel);
-	    panel.add(destLabel, new GridBagConstraints(2, 0, 1, 1, 0, 0,
+	    panel.add(destLabel, new GridBagConstraints(2, 1, 1, 1, 0, 0,
 	        GridBagConstraints.CENTER, GridBagConstraints.NONE,
 	        new Insets(0, 0, 5, 0), 0, 0));
-	    panel.add(new JScrollPane(destList), new GridBagConstraints(2, 1, 1, 5, .5,
+	    panel.add(new JScrollPane(destList), new GridBagConstraints(2, 2, 1, 5, .5,
 	        1.0, GridBagConstraints.CENTER, GridBagConstraints.BOTH,
 	        new Insets(0, 0, 5, 0), 0, 0));
 	    
@@ -250,7 +277,7 @@ public class SetView extends JDialog {
 	    gbc_lblFaza.anchor = GridBagConstraints.EAST;
 	    gbc_lblFaza.insets = new Insets(0, 0, 5, 5);
 	    gbc_lblFaza.gridx = 1;
-	    gbc_lblFaza.gridy = 6;
+	    gbc_lblFaza.gridy = 7;
 	    panel.add(lblFaza, gbc_lblFaza);
 	    
 	    txtFaza = new JTextField();
@@ -258,7 +285,7 @@ public class SetView extends JDialog {
 	    gbc_txtFaza.insets = new Insets(0, 0, 5, 0);
 	    gbc_txtFaza.fill = GridBagConstraints.HORIZONTAL;
 	    gbc_txtFaza.gridx = 2;
-	    gbc_txtFaza.gridy = 6;
+	    gbc_txtFaza.gridy = 7;
 	    panel.add(txtFaza, gbc_txtFaza);
 	    txtFaza.setColumns(10);
 	    
@@ -266,7 +293,7 @@ public class SetView extends JDialog {
 	    GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 	    gbc_panel_1.fill = GridBagConstraints.BOTH;
 	    gbc_panel_1.gridx = 2;
-	    gbc_panel_1.gridy = 7;
+	    gbc_panel_1.gridy = 8;
 	    panel.add(panel_1, gbc_panel_1);
 	    panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 	    
@@ -344,64 +371,30 @@ public class SetView extends JDialog {
 	public void setTxtFaza(JTextField txtFaza) {
 		this.txtFaza = txtFaza;
 	}
-	  
-	  
-}
 
-	class SortedListModel extends AbstractListModel {
-
-	  SortedSet model;
-
-	  public SortedListModel() {
-	    model = new TreeSet();
-	  }
-
-	  public int getSize() {
-	    return model.size();
-	  }
-
-	  public Object getElementAt(int index) {
-	    return model.toArray()[index];
-	  }
-
-	  public void add(Object element) {
-	    if (model.add(element)) {
-	      fireContentsChanged(this, 0, getSize());
-	    }
-	  }
-
-	  public void addAll(Object elements[]) {
-	    Collection c = Arrays.asList(elements);
-	    model.addAll(c);
-	    fireContentsChanged(this, 0, getSize());
-	  }
-
-	  public void clear() {
-	    model.clear();
-	    fireContentsChanged(this, 0, getSize());
-	  }
-
-	  public boolean contains(Object element) {
-	    return model.contains(element);
-	  }
-
-	  public Object firstElement() {
-	    return model.first();
-	  }
-
-	  public Iterator iterator() {
-	    return model.iterator();
-	  }
-
-	  public Object lastElement() {
-	    return model.last();
-	  }
-
-	  public boolean removeElement(Object element) {
-	    boolean removed = model.remove(element);
-	    if (removed) {
-	      fireContentsChanged(this, 0, getSize());
-	    }
-	    return removed;
-	  }
+	public SortedListModel getSourceListModel() {
+		return sourceListModel;
 	}
+
+	public void setSourceListModel(SortedListModel sourceListModel) {
+		this.sourceListModel = sourceListModel;
+	}
+
+	public SortedListModel getDestListModel() {
+		return destListModel;
+	}
+
+	public void setDestListModel(SortedListModel destListModel) {
+		this.destListModel = destListModel;
+	}
+
+	public JComboBox getCmbModel() {
+		return cmbModel;
+	}
+
+	public void setCmbModel(JComboBox cmbModel) {
+		this.cmbModel = cmbModel;
+	}
+	  
+	 
+}

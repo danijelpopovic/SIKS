@@ -18,13 +18,13 @@ public class StrukturaModelaService {
 
 	public StrukturaModela createStrukturaModela(int id, ModelZCSoftvera model,
 			Korak korak, Korak sledeci_korak) {
+		em.getTransaction().begin();
 		StrukturaModela emp = new StrukturaModela(id);
 		emp.setModel(model);
 		emp.setKorak(korak);
 		emp.setSledeci_korak(sledeci_korak);		
-
 		em.persist(emp);
-
+		em.getTransaction().commit();
 		return emp;
 	}	
 

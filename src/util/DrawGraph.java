@@ -1,10 +1,14 @@
 package util;
 
+import gui.MainFrame;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import services.FazaService;
+import services.KorakService;
 import model.Faza;
 import model.Korak;
 import model.ModelZCSoftvera;
@@ -23,13 +27,23 @@ public class DrawGraph {
 	 * in the file system.
 	 */
 	public void drawFaza(Faza faza) {
-		String labelFaza = faza.getNazivFaze();
+		
+		FazaService fs = MainFrame.getInstance().getFazaService();
+		KorakService ks = MainFrame.getInstance().getKorakService();
+		Faza fazaDb = fs.findFaza(faza.getId());
+		
+		String labelFaza = fazaDb.getNazivFaze();
 
 		GraphViz gv = new GraphViz();
 		gv.addln(gv.start_graph());
 		gv.addln(" label = <" + labelFaza + ">;");
 
-		Set<Korak> koraci = faza.getKoraci();
+		Set<Korak> koraci = new HashSet<Korak>();
+		
+		for(Korak k : ks.findAllKoraci()){
+			if(k.getFaza()!=null && k.getFaza().getId()==faza.getId())
+				koraci.add(k);
+		}
 
 		ArrayList<String> naziviKoraka = new ArrayList<String>();
 

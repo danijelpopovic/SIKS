@@ -32,7 +32,7 @@
 		<set name="koraci" table="Koraci" 
 			inverse="true" lazy="true" fetch="select">
            <key>
-               <column name="faza" not-null="true" />
+               <column name="faza" not-null="false" />
            </key>
            <one-to-many class="model.Korak" />
         </set>
@@ -47,7 +47,7 @@
 		</id>
 		<property name="naziv" column="naziv" type="string" not-null="true" />
 		<many-to-one name="faza" column="faza" class="model.Faza"
-			not-null="true" />
+			not-null="false" />
 	</class>
 
 	<class name="model.StrukturaModela" table="StrukturaModela">
