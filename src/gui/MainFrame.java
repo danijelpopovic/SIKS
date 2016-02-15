@@ -33,6 +33,7 @@ import tree.model.RootTreeModel;
 import tree.view.TreeView;
 import util.DrawGraph;
 import util.JPAUtil;
+import view.DialogKorak;
 import view.SetView;
 import actions.ActionManager;
 
@@ -50,6 +51,7 @@ public class MainFrame extends JFrame {
 	private JPanel buttonPanel = new JPanel();
 	private JButton btnSet;// = new JButton("Set");
 	private SetView setView;
+	private DialogKorak dialogKorak;
 
 	private static DrawGraph draw = new DrawGraph();
 
@@ -70,6 +72,8 @@ public class MainFrame extends JFrame {
 	public static ModelZCSoftveraService modelZCSoftveraService;
 	public static StrukturaModelaService strukturaModelaService;
 
+	public Menu menu;
+	
 	public static MainFrame getInstance() {
 		if (init == 0) {
 			
@@ -112,9 +116,6 @@ public class MainFrame extends JFrame {
 		getContentPane().add(treePanel, BorderLayout.WEST);		
 		
 		buttonPanel.setLayout(new BorderLayout());
-		btnSet = new JButton(getActionManager().getSet());
-		
-		buttonPanel.add(btnSet);
 		getContentPane().add(buttonPanel, BorderLayout.NORTH);
 		
 		
@@ -125,7 +126,12 @@ public class MainFrame extends JFrame {
 
 		initTree();
 		
-		this.add(panel, BorderLayout.CENTER);
+		getContentPane().add(panel, BorderLayout.CENTER);
+		btnSet = new JButton(getActionManager().getSet());
+		panel.add(btnSet);
+		menu = new Menu();
+		setJMenuBar(menu);
+		
 	}
 
 	public void initTree() {
@@ -311,6 +317,14 @@ public class MainFrame extends JFrame {
 	public void setStrukturaModelaService(
 			StrukturaModelaService strukturaModelaService) {
 		this.strukturaModelaService = strukturaModelaService;
+	}
+
+	public DialogKorak getDialogKorak() {
+		return dialogKorak;
+	}
+
+	public void setDialogKorak(DialogKorak dialogKorak) {
+		this.dialogKorak = dialogKorak;
 	}
 	
 	

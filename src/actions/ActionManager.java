@@ -1,4 +1,5 @@
 package actions;
+import actions.*;
 
 public class ActionManager {
 
@@ -8,6 +9,9 @@ public class ActionManager {
 	private SubmitAddFaza submitAddFaza;
 	private Set set;
 	private SetSubmit setSubmit;
+	private SetCancel setCancel;
+	private KorakTable korakTable;
+	private KorakTableSubmit korakTableSubmit;
 	
 	public ActionManager(){
 		initialiseActions();
@@ -21,6 +25,9 @@ public class ActionManager {
 		submitAddFaza = new SubmitAddFaza();
 		set = new Set();
 		setSubmit = new SetSubmit();
+		setCancel = new SetCancel();
+		korakTable= new KorakTable();
+		korakTableSubmit = new KorakTableSubmit();
 	}
 
 	
@@ -71,6 +78,30 @@ public class ActionManager {
 
 	public void setSetSubmit(SetSubmit setSubmit) {
 		this.setSubmit = setSubmit;
+	}
+
+	public SetCancel getSetCancel() {
+		return setCancel;
+	}
+
+	public void setSetCancel(SetCancel setCancel) {
+		this.setCancel = setCancel;
+	}
+
+	public KorakTable getKorakTable() {
+		return korakTable;
+	}
+
+	public void setKorakTable(KorakTable korakTable) {
+		this.korakTable = korakTable;
+	}
+
+	public KorakTableSubmit getKorakTableSubmit() {
+		return korakTableSubmit;
+	}
+
+	public void setKorakTableSubmit(KorakTableSubmit korakTableSubmit) {
+		this.korakTableSubmit = korakTableSubmit;
 	}
 	
 	

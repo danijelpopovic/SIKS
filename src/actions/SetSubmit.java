@@ -4,6 +4,7 @@ import gui.MainFrame;
 
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import services.FazaService;
 import services.KorakService;
 import services.ModelZCSoftveraService;
 import services.StrukturaModelaService;
+import view.SetView;
 import view.SortedListModel;
 
 import java.util.Set;
@@ -46,7 +48,8 @@ public class SetSubmit extends AbstractAction{
 		Faza f = fs.createFaza(0, nazivFaze);
 		
 		Object o = MainFrame.getInstance().getSetView().getCmbModel().getSelectedItem();
-				
+	
+		int positon=0;
 		if(o instanceof ModelZCSoftvera){
 			ms = mss.findModelZcSoftvera(((ModelZCSoftvera)o).getId());
 			if(ms!=null){
@@ -56,16 +59,24 @@ public class SetSubmit extends AbstractAction{
 					System.out.println("------->  "+model.getElementAt(i));
 					for(Korak k : koraci){
 						if(model.getElementAt(i).equals(k.getNaziv())){
-							ks.updateKorak(k.id, k.getNaziv(), f);
+							positon++;
+							ks.updateKorak(k.id, k.getNaziv(), f, positon);
+							
 							if(i==model.getModel().size()-1)
 								sms.createStrukturaModela(0, ms, k, null);
-							else
-								sms.createStrukturaModela(0, ms, k, koraci.get(counter+1));
+							else{
+								
+								Korak sledeciKorak =ks.findKorakByNaziv(model.getElementAt(counter+1).toString());
+								
+								sms.createStrukturaModela(0, ms, k, sledeciKorak);
+							}
+								
 							f.add(k);
 							break;
 						}
-						counter++;
+						
 					}
+					counter++;
 				}
 				
 				ms.add(f);
@@ -73,5 +84,27 @@ public class SetSubmit extends AbstractAction{
 			SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getTreeView());
 		}
 		
+		MainFrame.getInstance().getSetView().dispose();
+		
+		SetView sv = new SetView(MainFrame.getInstance());
+		MainFrame.getInstance().setSetView(sv);
+				
+		List<Korak> koraci = (List<Korak>) ks.findAllKoraci();
+		Collection koraciNazivi = new ArrayList<String>();
+		
+		for(Korak k: koraci){
+			if(k.getFaza()==null)
+				koraciNazivi.add(k.getNaziv());
+		}
+		//new String[] { "One", "Two", "Three" }
+		sv.addSourceElements(koraciNazivi.toArray());
+		
+		ModelZCSoftveraService mzcss = MainFrame.getInstance().getModelZCSoftveraService();
+	    List<ModelZCSoftvera> modeli = (List<ModelZCSoftvera>) mzcss.findAllModelZcSoftvera();
+	    for(ModelZCSoftvera m: modeli){
+	    	sv.getCmbModel().addItem(m);
+	    }	
+	    
+	    MainFrame.getInstance().setSetView(sv);
 	}
 }

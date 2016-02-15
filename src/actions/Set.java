@@ -18,6 +18,7 @@ import view.SetView;
 
 public class Set extends AbstractAction{
 
+	public SetView sv;
 	public Set(){
 		putValue(NAME, "Set");
 	}
@@ -25,7 +26,7 @@ public class Set extends AbstractAction{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		SetView sv = new SetView(MainFrame.getInstance());
+		sv = new SetView(MainFrame.getInstance());
 		MainFrame.getInstance().setSetView(sv);
 		KorakService ks = new KorakService(MainFrame.getInstance().getEm());
 		
@@ -47,4 +48,13 @@ public class Set extends AbstractAction{
 		
 	}
 
+	public SetView getSv() {
+		return sv;
+	}
+
+	public void setSv(SetView sv) {
+		this.sv = sv;
+	}
+
+	
 }

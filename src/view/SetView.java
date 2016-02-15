@@ -13,8 +13,8 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
+/*import java.util.SortedSet;
+import java.util.TreeSet;*/
 
 import javax.swing.AbstractListModel;
 import javax.swing.BorderFactory;
@@ -28,13 +28,12 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
-import app.DualListBox;
+
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-import model.ModelZCSoftvera;
-import net.miginfocom.swing.MigLayout;
+
 
 import java.awt.FlowLayout;
 
@@ -137,12 +136,16 @@ public class SetView extends JDialog {
 	  }
 
 	  public void addDestinationElements(Object newValue[]) {
-	    fillListModel(destListModel, newValue);
+		  fillListModelDest(destListModel, newValue);
 	  }
 
 	  private void fillListModel(SortedListModel model, Object newValues[]) {
 	    model.addAll(newValues);
 	  }
+	  
+	  private void fillListModelDest(SortedListModel model, Object newValues[]) {
+		    model.addAllDest(newValues);
+		  }
 
 	  public Iterator sourceIterator() {
 	    return sourceListModel.iterator();
@@ -297,7 +300,7 @@ public class SetView extends JDialog {
 	    panel.add(panel_1, gbc_panel_1);
 	    panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 	    
-	    btnCancel = new JButton("Cancel");
+	    btnCancel = new JButton(MainFrame.getInstance().getActionManager().getSetCancel());
 	    btnCancel.setHorizontalAlignment(SwingConstants.RIGHT);
 	    btnCancel.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent e) {
@@ -335,6 +338,9 @@ public class SetView extends JDialog {
 	  private class AddListener implements ActionListener {
 	    public void actionPerformed(ActionEvent e) {
 	      Object selected[] = sourceList.getSelectedValues();
+	      
+	 
+	      
 	      addDestinationElements(selected);
 	      clearSourceSelected();
 	    }

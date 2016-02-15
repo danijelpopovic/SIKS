@@ -3,8 +3,13 @@ package util;
 import gui.MainFrame;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import services.FazaService;
@@ -38,19 +43,32 @@ public class DrawGraph {
 		gv.addln(gv.start_graph());
 		gv.addln(" label = <" + labelFaza + ">;");
 
-		Set<Korak> koraci = new HashSet<Korak>();
+		Set<Korak> koraci = (Set<Korak>) fs.findFaza(faza.getId()).getKoraci();
 		
-		for(Korak k : ks.findAllKoraci()){
+		/*for(Korak k : ks.findAllKoraci()){
 			if(k.getFaza()!=null && k.getFaza().getId()==faza.getId())
 				koraci.add(k);
-		}
-
+		}*/
+		
 		ArrayList<String> naziviKoraka = new ArrayList<String>();
-
+		 
+		ArrayList<Integer> pozicije = new ArrayList<Integer>();
 		for (Korak k : koraci) {
-			naziviKoraka.add(k.getNaziv());
-			// System.out.println(k.getNaziv());
+			pozicije.add(k.getPozicija());
 		}
+		
+		Collections.sort(pozicije);
+
+		
+		
+		for(int i=0; i<pozicije.size(); i++){
+			for (Korak k : koraci) {
+				if(pozicije.get(i) ==k.getPozicija()){
+					naziviKoraka.add(k.getNaziv());
+				}
+			}
+		}
+	
 
 		String node = "";
 		String node1 = "";
@@ -84,6 +102,11 @@ public class DrawGraph {
 		gv.writeGraphToFile(
 				gv.getGraph(gv.getDotSource(), type, repesentationType), out);
 	}	
+	
+	private void addObject(int i, String object, ArrayList<String> list) {
+	   
+	    
+	}
 
 	public void drawModel(ModelZCSoftvera model) {
 

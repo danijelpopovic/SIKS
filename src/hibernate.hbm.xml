@@ -48,6 +48,7 @@
 		<property name="naziv" column="naziv" type="string" not-null="true" />
 		<many-to-one name="faza" column="faza" class="model.Faza"
 			not-null="false" />
+		<property name="pozicija" column="pozicija" type="int" not-null="false" />
 	</class>
 
 	<class name="model.StrukturaModela" table="StrukturaModela">
