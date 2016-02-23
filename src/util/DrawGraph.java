@@ -32,11 +32,11 @@ public class DrawGraph {
 	 * in the file system.
 	 */
 	public void drawFaza(Faza faza) {
-		
+
 		FazaService fs = MainFrame.getInstance().getFazaService();
 		KorakService ks = MainFrame.getInstance().getKorakService();
 		Faza fazaDb = fs.findFaza(faza.getId());
-		
+
 		String labelFaza = fazaDb.getNazivFaze();
 
 		GraphViz gv = new GraphViz();
@@ -44,31 +44,28 @@ public class DrawGraph {
 		gv.addln(" label = <" + labelFaza + ">;");
 
 		Set<Korak> koraci = (Set<Korak>) fs.findFaza(faza.getId()).getKoraci();
-		
-		/*for(Korak k : ks.findAllKoraci()){
-			if(k.getFaza()!=null && k.getFaza().getId()==faza.getId())
-				koraci.add(k);
-		}*/
-		
+
+		/*
+		 * for(Korak k : ks.findAllKoraci()){ if(k.getFaza()!=null &&
+		 * k.getFaza().getId()==faza.getId()) koraci.add(k); }
+		 */
+
 		ArrayList<String> naziviKoraka = new ArrayList<String>();
-		 
+
 		ArrayList<Integer> pozicije = new ArrayList<Integer>();
 		for (Korak k : koraci) {
 			pozicije.add(k.getPozicija());
 		}
-		
+
 		Collections.sort(pozicije);
 
-		
-		
-		for(int i=0; i<pozicije.size(); i++){
+		for (int i = 0; i < pozicije.size(); i++) {
 			for (Korak k : koraci) {
-				if(pozicije.get(i) ==k.getPozicija()){
+				if (pozicije.get(i) == k.getPozicija()) {
 					naziviKoraka.add(k.getNaziv());
 				}
 			}
 		}
-	
 
 		String node = "";
 		String node1 = "";
@@ -89,7 +86,7 @@ public class DrawGraph {
 		} else {
 			gv.addln("Prazan cvor");
 		}
-		
+
 		gv.addln(gv.end_graph());
 		System.out.println(gv.getDotSource());
 
@@ -101,38 +98,56 @@ public class DrawGraph {
 		File out = new File("GraphViz/graph." + type); // Windows
 		gv.writeGraphToFile(
 				gv.getGraph(gv.getDotSource(), type, repesentationType), out);
-	}	
-	
+	}
+
 	private void addObject(int i, String object, ArrayList<String> list) {
-	   
-	    
+
 	}
 
 	public void drawModel(ModelZCSoftvera model) {
 
 		Set<StrukturaModela> strukture = model.getStrukturaModela();
 		Set<Korak> koraci = new HashSet<Korak>();
+		Set<Faza> faze = new HashSet<Faza>();
 		String labelModel = model.getNaziv();
-		
+
 		for (StrukturaModela s : strukture) {
 			koraci.add(s.getKorak());
-			if (s.getSledeci_korak() != null)
+			faze.add(s.getKorak().getFaza());
+			if (s.getSledeci_korak() != null) {
 				koraci.add(s.getSledeci_korak());
-		}		
+				faze.add(s.getSledeci_korak().getFaza());
+			}
+		}
+
+		String korak = "";
+		String faza = "";
 
 		GraphViz gv = new GraphViz();
 		gv.addln(gv.start_graph());
+		gv.addln("graph [autosize=false, size=\"20.7,7.0!\", resolution=100];");
 		gv.addln("label = <" + labelModel + ">;");
-		
-		String korak = "";
+
+		for (Faza f : faze) {
+			
+			faza = f.getNazivFaze().replaceAll("\\s", "_");
+			
+			gv.addln(gv.start_subgraph(f.getId()));
+			gv.addln("style=filled; color=lightgrey; node [style=filled,color=white];");
+
+			for (Korak k : koraci) {
+				if (k.getFaza().getNazivFaze() == f.getNazivFaze()) {
+					korak = k.getNaziv().replaceAll("\\s", "_");
+					gv.addln(korak
+					+ "[style = filled; color = yellow; fontcolor = white; fillcolor = violet]");
+				}
+			}
+			gv.addln("label = <" + faza + ">;");
+			gv.addln(gv.end_subgraph());
+		}
+
 		String korak1 = "";
 		String korak2 = "";
-		
-		for (Korak k : koraci) {
-			korak = k.getNaziv().replaceAll("\\s", "_");
-			gv.addln(korak
-					+ "[style = filled; color = yellow; fontcolor = white; fillcolor = violet]");
-		}
 
 		for (StrukturaModela s : strukture) {
 			if (s.getSledeci_korak() != null) {
@@ -141,12 +156,12 @@ public class DrawGraph {
 				gv.addln(korak1 + " -> " + korak2);
 			}
 
-		}		
-
+		}
+		
 		gv.addln(gv.end_graph());
 		System.out.println(gv.getDotSource());
 
-		gv.increaseDpi(); // 106 dpi
+		gv.decreaseDpi(); // 106 dpi
 
 		String type = "png";
 		String repesentationType = "dot";
