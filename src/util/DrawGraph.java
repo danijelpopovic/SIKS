@@ -14,6 +14,8 @@ import java.util.Set;
 
 import services.FazaService;
 import services.KorakService;
+import services.ModelZCSoftveraService;
+import services.StrukturaModelaService;
 import model.Faza;
 import model.Korak;
 import model.ModelZCSoftvera;
@@ -106,7 +108,16 @@ public class DrawGraph {
 
 	public void drawModel(ModelZCSoftvera model) {
 
-		Set<StrukturaModela> strukture = model.getStrukturaModela();
+		ModelZCSoftvera m = (ModelZCSoftvera)MainFrame.getInstance().getTreeView().getLastSelectedPathComponent();
+		StrukturaModelaService sms = MainFrame.getInstance().getStrukturaModelaService();
+		List<StrukturaModela> sveStrukture = (List<StrukturaModela>) sms.findAllStrukturaModela();
+		Set<StrukturaModela> strukture = new  HashSet<StrukturaModela>();
+		
+		for(StrukturaModela sm: sveStrukture){
+			if(sm.getModel().getId()==m.getId())
+				strukture.add(sm);
+		}
+		
 		Set<Korak> koraci = new HashSet<Korak>();
 		Set<Faza> faze = new HashSet<Faza>();
 		String labelModel = model.getNaziv();
@@ -115,6 +126,7 @@ public class DrawGraph {
 			koraci.add(s.getKorak());
 			faze.add(s.getKorak().getFaza());
 			if (s.getSledeci_korak() != null) {
+				
 				koraci.add(s.getSledeci_korak());
 				faze.add(s.getSledeci_korak().getFaza());
 			}

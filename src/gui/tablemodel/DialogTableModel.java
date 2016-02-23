@@ -20,6 +20,8 @@ public abstract class DialogTableModel extends DefaultTableModel {
 	//public abstract void updateRow(int index, String sifra, String naziv) throws SQLException;
 	//public abstract int insertRow(String sifra, String naziv) throws SQLException;
 	//public abstract void openAsChildForm(String where) throws SQLException;
+
+	public abstract void open(int id);
 	
 	
 }

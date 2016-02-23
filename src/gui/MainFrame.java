@@ -33,6 +33,7 @@ import tree.model.RootTreeModel;
 import tree.view.TreeView;
 import util.DrawGraph;
 import util.JPAUtil;
+import view.DefineStructView;
 import view.DialogKorak;
 import view.SetView;
 import actions.ActionManager;
@@ -52,6 +53,7 @@ public class MainFrame extends JFrame {
 	private JButton btnSet;// = new JButton("Set");
 	private SetView setView;
 	private DialogKorak dialogKorak;
+	private DefineStructView dialogDefine;
 
 	private static DrawGraph draw = new DrawGraph();
 
@@ -183,6 +185,7 @@ public class MainFrame extends JFrame {
 								modelZCSoftvera.add(f);
 								if(f.getKoraci()!=null && f.getKoraci().size()>0){
 									for(Korak k: f.getKoraci()){
+										if(struktura.getKorak().getId() == k.getId())
 										f.add(k);
 									}
 								}
@@ -325,6 +328,14 @@ public class MainFrame extends JFrame {
 
 	public void setDialogKorak(DialogKorak dialogKorak) {
 		this.dialogKorak = dialogKorak;
+	}
+
+	public DefineStructView getDialogDefine() {
+		return dialogDefine;
+	}
+
+	public void setDialogDefine(DefineStructView dialogDefine) {
+		this.dialogDefine = dialogDefine;
 	}
 	
 	

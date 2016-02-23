@@ -14,6 +14,7 @@ public class JTreePopupMenu{
 	JMenuItem addFaza;
 	JMenuItem addKorak;
 	JMenuItem addModelZC;
+	JMenuItem defineModel;
 	
 	JMenuItem removeFaza;
 	JMenuItem removeKorak;
@@ -30,10 +31,12 @@ public class JTreePopupMenu{
 		removeFaza = new JMenuItem("Obrisi fazu");
 		removeKorak = new JMenuItem("Obrisi korak");
 		removeModelZC = new JMenuItem("Obrisi novi model");
+		defineModel = new JMenuItem(MainFrame.getInstance().getActionManager().getDefineStructGet());
 		
 		popupMenu = new JPopupMenu();
 		popupMenu.add(addModelZC);
 		popupMenu.add(removeModelZC);
+		popupMenu.add(defineModel);
 		
 		popupMenu.add(addKorak);
 		popupMenu.add(removeKorak);
@@ -105,6 +108,14 @@ public class JTreePopupMenu{
 
 	public void show(Component component, int x, int y) {
 		popupMenu.show(component, x, y);
+	}
+
+	public JMenuItem getDefineModel() {
+		return defineModel;
+	}
+
+	public void setDefineModel(JMenuItem defineModel) {
+		this.defineModel = defineModel;
 	}
 
 	

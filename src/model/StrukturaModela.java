@@ -1,6 +1,8 @@
 package model;
 
-public class StrukturaModela {
+import javax.swing.tree.DefaultMutableTreeNode;
+
+public class StrukturaModela extends DefaultMutableTreeNode{
 
 	public int id;
 

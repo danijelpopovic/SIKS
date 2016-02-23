@@ -57,4 +57,10 @@ public class Korak extends DialogTableModel{
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public void open(int id) {
+		// TODO Auto-generated method stub
+		
+	}
 }

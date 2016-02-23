@@ -12,6 +12,8 @@ public class ActionManager {
 	private SetCancel setCancel;
 	private KorakTable korakTable;
 	private KorakTableSubmit korakTableSubmit;
+	private DefineStructGet defineStructGet;
+	private DefineStructSubmit defineStructSubmit;
 	
 	public ActionManager(){
 		initialiseActions();
@@ -28,6 +30,8 @@ public class ActionManager {
 		setCancel = new SetCancel();
 		korakTable= new KorakTable();
 		korakTableSubmit = new KorakTableSubmit();
+		defineStructGet = new DefineStructGet();
+		defineStructSubmit = new DefineStructSubmit();
 	}
 
 	
@@ -102,6 +106,22 @@ public class ActionManager {
 
 	public void setKorakTableSubmit(KorakTableSubmit korakTableSubmit) {
 		this.korakTableSubmit = korakTableSubmit;
+	}
+
+	public DefineStructGet getDefineStructGet() {
+		return defineStructGet;
+	}
+
+	public void setDefineStructGet(DefineStructGet defineStructGet) {
+		this.defineStructGet = defineStructGet;
+	}
+
+	public DefineStructSubmit getDefineStructSubmit() {
+		return defineStructSubmit;
+	}
+
+	public void setDefineStructSubmit(DefineStructSubmit defineStructSubmit) {
+		this.defineStructSubmit = defineStructSubmit;
 	}
 	
 	
