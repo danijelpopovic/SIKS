@@ -35,10 +35,7 @@
                <column name="faza" not-null="false" />
            </key>
            <one-to-many class="model.Korak" />
-        </set>
-        
-        <many-to-one name="nadfaza" column="nadfaza" class="model.Faza"
-			not-null="false" />       
+        </set>       
 	</class>
 
 	<class name="model.Korak" table="Koraci">

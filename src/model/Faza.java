@@ -12,9 +12,7 @@ public class Faza extends DefaultMutableTreeNode{
 
 	public String nazivFaze;
 	
-	public Set<Korak> koraci = new HashSet<Korak>(0);
-	
-	public Faza nadfaza;	
+	public Set<Korak> koraci = new HashSet<Korak>(0);	
 
 	public int getId() {
 		return id;
@@ -38,22 +36,7 @@ public class Faza extends DefaultMutableTreeNode{
 
 	public void setKoraci(Set<Korak> koraci) {
 		this.koraci = koraci;
-	}
-	
-	public Faza getNadfaza() {
-		return nadfaza;
-	}
-
-	public void setNadfaza(Faza nadfaza) {
-		this.nadfaza = nadfaza;
-	}
-	
-	public Faza(int id, String nazivFaze, Faza nadfaza) {
-		super();
-		this.id = id;
-		this.nazivFaze = nazivFaze;
-		this.nadfaza = nadfaza;
-	}
+	}	
 
 	public Faza(int id, String nazivFaze) {
 		super();
