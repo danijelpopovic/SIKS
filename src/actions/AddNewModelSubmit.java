@@ -3,15 +3,15 @@ package actions;
 import gui.MainFrame;
 
 import java.awt.event.ActionEvent;
+import java.util.Collection;
 
 import javax.swing.AbstractAction;
+import javax.swing.JOptionPane;
 
+import model.ModelZCSoftvera;
 import services.ModelZCSoftveraService;
-import view.NewModelDialog;
 
 public class AddNewModelSubmit extends AbstractAction {
-
-	public NewModelDialog md;
 
 	public AddNewModelSubmit() {
 		putValue(NAME, "Snimi");
@@ -24,16 +24,26 @@ public class AddNewModelSubmit extends AbstractAction {
 		String skraceni = MainFrame.getInstance().getNewModelDialog().getTxtSkraceni().getText();
 		String opis = MainFrame.getInstance().getNewModelDialog().getTxtOpis().getText();
 		
+		if (naziv.equals("")) {
+			JOptionPane.showMessageDialog(null, "Model mora imati naziv", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
 		ModelZCSoftveraService ms = MainFrame.getInstance().getModelZCSoftveraService();
+				
+		Collection<ModelZCSoftvera> modeli = ms.findAllModelZcSoftvera();
+		
+		for (ModelZCSoftvera m : modeli) {
+			if (m.getNaziv().equals(naziv)) {
+				JOptionPane.showMessageDialog(null, "Vec postoji model sa zadatim nazivom", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+				return;
+			}				
+		}
 		
 		ms.createModelZcSoftvera(0, naziv, skraceni, opis);		
 		
 		MainFrame.getInstance().getNewModelDialog().dispose();
-		/*md = new DialogKorak(MainFrame.getInstance());
-		dk.setVisible(true);
-		MainFrame.getInstance().setDialogKorak(dk);*/
 		
-
 	}
 
 }

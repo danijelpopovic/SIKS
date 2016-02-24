@@ -18,9 +18,7 @@ public class JTreePopupMenu{
 	
 	JMenuItem removeFaza;
 	JMenuItem removeKorak;
-	JMenuItem removeModelZC;
-	
-	
+	JMenuItem removeModelZC;	
 	
 	public JTreePopupMenu(){
 		addFaza = new JMenuItem(MainFrame.getInstance().getActionManager().getAddNewFaza());
