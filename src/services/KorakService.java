@@ -21,7 +21,6 @@ public class KorakService {
 		
 		emp.setNaziv(naziv);		
 		emp.setFaza(faza);
-		emp.setPozicija(0);
 		em.persist(emp);
 		em.getTransaction().commit();
 		return emp;
@@ -32,7 +31,6 @@ public class KorakService {
 		Korak emp = em.find(Korak.class, id);
 		emp.setNaziv(naziv);		
 		emp.setFaza(faza);
-		emp.setPozicija(pozicija);
 		em.persist(emp);
 		em.getTransaction().commit();
 		return emp;

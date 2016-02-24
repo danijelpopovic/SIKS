@@ -24,16 +24,15 @@ public class TreeController implements MouseListener {
 		if (selPath != null) {
 			node = selPath.getLastPathComponent();
 			if (node instanceof Faza) {
-				Faza faza = (Faza) node;
+				ModelZCSoftvera m = (ModelZCSoftvera)((Faza) node).getParent();
 				MainFrame.getInstance();
-				MainFrame.getDraw().drawFaza(faza);
-				MainFrame.getInstance().addGraph();
+				MainFrame.getDraw().drawModel(m);
+				MainFrame.getInstance().addGraph();			
 			}
 			else if (node instanceof Korak) {
-				Korak korak = (Korak) node;
-				Faza faza = korak.getFaza();
+				ModelZCSoftvera m = (ModelZCSoftvera)(((Korak) node).getParent()).getParent();
 				MainFrame.getInstance();
-				MainFrame.getDraw().drawFaza(faza);
+				MainFrame.getDraw().drawModel(m);
 				MainFrame.getInstance().addGraph();
 			}
 			else if (node instanceof ModelZCSoftvera) {
