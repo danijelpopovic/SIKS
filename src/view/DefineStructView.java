@@ -33,6 +33,7 @@ public class DefineStructView extends JDialog{
 	public String[] columns;
 	public JTable table;
 	public JSplitPane splitPane;
+	public JButton btnObrisi;
 	
 	public DefineStructView(JFrame parent) {
 		super(parent);
@@ -87,6 +88,10 @@ public class DefineStructView extends JDialog{
 		btnOdustani = new JButton("Odustani");
 		panel.add(btnOdustani, "cell 8 0");
 		panel.add(btnSnimi, "cell 9 0");
+		
+		btnObrisi = new JButton(MainFrame.getInstance().getActionManager().getRemoveStruktura());
+		panel.add(btnObrisi, "cell 10 0");
+		
 		
 		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,panTable,panDetail);
 		splitPane.setResizeWeight(0.5);
@@ -143,6 +148,14 @@ public class DefineStructView extends JDialog{
 
 	public void setTableModel(model.table.StrukturaModela tableModel) {
 		this.tableModel = tableModel;
+	}
+
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
 	}
 	
 	

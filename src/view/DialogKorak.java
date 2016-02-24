@@ -22,6 +22,8 @@ import net.miginfocom.swing.MigLayout;
 import model.table.Korak;
 
 import javax.swing.JComboBox;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class DialogKorak extends JDialog{
 

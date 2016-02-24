@@ -10,7 +10,7 @@ public class Korak extends DefaultMutableTreeNode {
 	public String naziv;
 
 	public Faza faza;
-
+	
 	public int getId() {
 		return id;
 	}

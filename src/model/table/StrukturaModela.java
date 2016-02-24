@@ -65,13 +65,13 @@ public class StrukturaModela extends DialogTableModel{
 	@Override
 	public void checkRow(int index) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("1");
 	}
 
 	@Override
 	public void deleteRow(int index) {
 		// TODO Auto-generated method stub
-		
+		this.removeRow(index);
 	}
 
 }

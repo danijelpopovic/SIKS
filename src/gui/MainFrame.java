@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.imageio.ImageIO;
 import javax.persistence.EntityManager;
@@ -29,6 +30,7 @@ import services.FazaService;
 import services.KorakService;
 import services.ModelZCSoftveraService;
 import services.StrukturaModelaService;
+import tree.model.ModelZcTree;
 import tree.model.RootTreeModel;
 import tree.view.TreeView;
 import util.DrawGraph;
@@ -189,7 +191,15 @@ public class MainFrame extends JFrame {
 
 			for (StrukturaModela struktura : modelZCSoftvera
 					.getStrukturaModela()) {
-				for (Faza f : faze) {
+				
+				Faza f = struktura.getKorak().getFaza();
+				Faza fn = new Faza(f.getId(), f.getNazivFaze());
+				modelZCSoftvera.add(fn);
+				fn.add(new Korak(struktura.getKorak().getId(), struktura.getKorak().getNaziv(), null));
+				fn.add(new Korak(struktura.getSledeci_korak().getId(), struktura.getSledeci_korak().getNaziv(), null));
+				
+				
+				/*for (Faza f : faze) {
 					if (struktura.getKorak().getFaza().id == f.id) {
 						// System.out.println(f.getNazivFaze());
 						modelZCSoftvera.add(f);
@@ -197,11 +207,12 @@ public class MainFrame extends JFrame {
 							for (Korak k : f.getKoraci()) {
 								if (struktura.getKorak().getId() == k.getId())
 									f.add(k);
+								
 							}
 						}
 
 					}
-				}
+				}*/
 
 			}
 

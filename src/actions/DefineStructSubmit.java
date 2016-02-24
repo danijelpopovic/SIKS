@@ -8,6 +8,7 @@ import javax.swing.AbstractAction;
 import javax.swing.SwingUtilities;
 
 import services.StrukturaModelaService;
+import model.Faza;
 import model.Korak;
 import model.ModelZCSoftvera;
 
@@ -27,8 +28,10 @@ public class DefineStructSubmit extends AbstractAction{
 		sms.createStrukturaModela(0, model, korak, sledeciKorak);
 		MainFrame.getInstance().getDialogDefine().dispose();
 		
-		model.add(korak.getFaza());
-		korak.getFaza().add(korak);
+		Faza f = new Faza(korak.getFaza().getId(),korak.getFaza().getNazivFaze());
+		model.add(f);
+		f.add(new Korak(korak.getId(), korak.getNaziv(), korak.getFaza()));
+		f.add(new Korak(sledeciKorak.getId(), sledeciKorak.getNaziv(), sledeciKorak.getFaza()));
 		
 		
 		SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getTreeView());

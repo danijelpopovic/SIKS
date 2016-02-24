@@ -40,8 +40,8 @@ public class AddNewModelSubmit extends AbstractAction {
 			}				
 		}
 		
-		ms.createModelZcSoftvera(0, naziv, skraceni, opis);		
-		
+		ModelZCSoftvera model = ms.createModelZcSoftvera(0, naziv, skraceni, opis);		
+		MainFrame.getInstance().getTreeView().AddModelZC(model);
 		MainFrame.getInstance().getNewModelDialog().dispose();
 		
 	}

@@ -2,12 +2,15 @@ package model;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
 
 public class Faza extends DefaultMutableTreeNode{
 
+	public UUID gId;
+	
 	public int id;
 
 	public String nazivFaze;
@@ -42,20 +45,32 @@ public class Faza extends DefaultMutableTreeNode{
 		super();
 		this.id = id;
 		this.nazivFaze = nazivFaze;
+		gId= UUID.randomUUID();
 	}
 
 	public Faza(int id) {
 		super();
 		this.id = id;
+		gId= UUID.randomUUID();
 	}
 
 	public Faza() {
 		super();
+		gId= UUID.randomUUID();
 	}
 
 	@Override
 	public String toString() {
 		return nazivFaze;
+	}
+
+	public UUID getgId() {
+		return gId;
+	}
+
+	public void setgId(UUID gId) {
+		this.gId = gId;
 	}	
 
+	
 }

@@ -31,7 +31,9 @@ public class StrukturaModelaService {
 	public void removeStrukturaModela(int id) {
 		StrukturaModela emp = findStrukturaModela(id);
 		if (emp != null) {
+			em.getTransaction().begin();
 			em.remove(emp);
+			em.getTransaction().commit();
 		}
 	}
 

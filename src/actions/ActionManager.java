@@ -16,10 +16,12 @@ public class ActionManager {
 	private DefineStructSubmit defineStructSubmit;
 	private RemoveKorak removeKorak;
 	private RemoveModel removeModel;
+	private RemoveStruktura removeStruktura;
 	private ModelProperties modelProperties;
 	private FazaProperties fazaProperties;
 	private KorakProperties korakProperties;
 
+	
 	public ActionManager() {
 		initialiseActions();
 	}
@@ -43,6 +45,7 @@ public class ActionManager {
 		modelProperties = new ModelProperties();
 		fazaProperties = new FazaProperties();
 		korakProperties = new KorakProperties();
+		removeStruktura=new RemoveStruktura();
 	}
 
 	public AddNewFaza getAddNewFaza() {
@@ -181,4 +184,13 @@ public class ActionManager {
 		this.korakProperties = korakProperties;
 	}
 
+	public RemoveStruktura getRemoveStruktura() {
+		return removeStruktura;
+	}
+
+	public void setRemoveStruktura(RemoveStruktura removeStruktura) {
+		this.removeStruktura = removeStruktura;
+	}
+
+	
 }
