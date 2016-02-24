@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import model.Korak;
 import model.ModelZCSoftvera;
 
 public class ModelZCSoftveraService {
@@ -30,6 +31,15 @@ public class ModelZCSoftveraService {
 
 	public ModelZCSoftvera findModelZcSoftvera(int id) {
 		return em.find(ModelZCSoftvera.class, id);
+	}
+	
+	public void removeModelZCSoftvera(int id) {
+		em.getTransaction().begin();
+		ModelZCSoftvera emp = findModelZcSoftvera(id);
+		if (emp != null) {
+			em.remove(emp);
+		}
+		em.getTransaction().commit();
 	}
 
 	@SuppressWarnings("unchecked")

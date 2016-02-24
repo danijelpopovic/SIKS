@@ -40,8 +40,8 @@ public class DefineStructGet extends AbstractAction{
 		
 		for (int i = 0; i < dsv.getCmbModel().getItemCount(); i++)
         {
-
 	        ModelZCSoftvera item = (ModelZCSoftvera)dsv.getCmbModel().getItemAt(i);
+	        //System.out.println(item);
             if (item.getId() == ((ModelZCSoftvera)o).getId())
             {
             	dsv.getCmbModel().setSelectedIndex(i);

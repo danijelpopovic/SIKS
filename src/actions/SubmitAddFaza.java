@@ -36,13 +36,9 @@ public class SubmitAddFaza extends AbstractAction{
 			
 			Faza faza = fs.createFaza(0, nazivFaze,modelZc.getId());
 			//((ModelZCSoftvera)o).a
-			modelZc.add(faza);
-	
+			modelZc.add(faza);		
 			
-			
-			
-			SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getTreeView());
-			
+			SwingUtilities.updateComponentTreeUI(MainFrame.getInstance().getTreeView());	
 			
 		}
 		

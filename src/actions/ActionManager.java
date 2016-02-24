@@ -14,7 +14,9 @@ public class ActionManager {
 	private KorakTableSubmit korakTableSubmit;
 	private DefineStructGet defineStructGet;
 	private DefineStructSubmit defineStructSubmit;
-	
+	private RemoveKorak removeKorak;
+	private RemoveModel removeModel;	
+
 	public ActionManager(){
 		initialiseActions();
 	}
@@ -33,6 +35,8 @@ public class ActionManager {
 		korakTableSubmit = new KorakTableSubmit();
 		defineStructGet = new DefineStructGet();
 		defineStructSubmit = new DefineStructSubmit();
+		removeKorak = new RemoveKorak();
+		removeModel = new RemoveModel();
 	}
 
 	
@@ -131,6 +135,22 @@ public class ActionManager {
 
 	public void setAddNewModelSubmit(AddNewModelSubmit addNewModelSubmit) {
 		this.addNewModelSubmit = addNewModelSubmit;
+	}
+	
+	public RemoveKorak getRemoveKorak() {
+		return removeKorak;
+	}
+
+	public void setRemoveKorak(RemoveKorak removeKorak) {
+		this.removeKorak = removeKorak;
+	}
+	
+	public RemoveModel getRemoveModel() {
+		return removeModel;
+	}
+
+	public void setRemoveModel(RemoveModel removeModel) {
+		this.removeModel = removeModel;
 	}
 	
 }

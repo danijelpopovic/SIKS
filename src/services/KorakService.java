@@ -37,10 +37,12 @@ public class KorakService {
 	}
 
 	public void removeKorak(int id) {
+		em.getTransaction().begin();
 		Korak emp = findKorak(id);
 		if (emp != null) {
 			em.remove(emp);
 		}
+		em.getTransaction().commit();
 	}
 
 	public Korak findKorak(int id) {
