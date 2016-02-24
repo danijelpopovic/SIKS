@@ -16,21 +16,16 @@ public class ModelZCSoftveraService {
 
 	public ModelZCSoftvera createModelZcSoftvera(int id,
 			String naziv, String skraceniNaziv, String opis) {
+		em.getTransaction().begin();
 		ModelZCSoftvera emp = new ModelZCSoftvera(id);
 		emp.setNaziv(naziv);
 		emp.setOpis(opis);
 		emp.setSkraceniNaziv(skraceniNaziv);
-		//emp.setStrukturaModela(strukturaModela);
+		
 		em.persist(emp);
+		em.getTransaction().commit();
 
 		return emp;
-	}
-
-	public void removeProfessor(int id) {
-		ModelZCSoftvera emp = findModelZcSoftvera(id);
-		if (emp != null) {
-			em.remove(emp);
-		}
 	}
 
 	public ModelZCSoftvera findModelZcSoftvera(int id) {

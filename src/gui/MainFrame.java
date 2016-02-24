@@ -35,6 +35,7 @@ import util.DrawGraph;
 import util.JPAUtil;
 import view.DefineStructView;
 import view.DialogKorak;
+import view.NewModelDialog;
 import view.SetView;
 import actions.ActionManager;
 
@@ -53,35 +54,38 @@ public class MainFrame extends JFrame {
 	private JButton btnSet;// = new JButton("Set");
 	private SetView setView;
 	private DialogKorak dialogKorak;
+	private NewModelDialog newModelDialog;
 	private DefineStructView dialogDefine;
 
 	private static DrawGraph draw = new DrawGraph();
 
-	public static enum ActionType {KORAK, FAZA, MODEL};
-	
-	private ActionType actionType; 
-	
+	public static enum ActionType {
+		KORAK, FAZA, MODEL
+	};
+
+	private ActionType actionType;
+
 	public ActionManager actionManager;
-	
+
 	public static EntityManagerFactory emf;
-	
+
 	public static EntityManager em;
 
 	private TreeView treeView;
-	
+
 	public static FazaService fazaService;
 	public static KorakService korakService;
 	public static ModelZCSoftveraService modelZCSoftveraService;
 	public static StrukturaModelaService strukturaModelaService;
 
 	public Menu menu;
-	
+
 	public static MainFrame getInstance() {
 		if (init == 0) {
-			
+
 			instance = new MainFrame();
 			init = 1;
-			
+
 			return instance;
 		}
 		return instance;
@@ -89,25 +93,23 @@ public class MainFrame extends JFrame {
 
 	private MainFrame() {
 		super();
-		
-		
-		
+
 		actionManager = new ActionManager();
 
 		try {
 			JPAUtil util = new JPAUtil();
-			 emf = Persistence.createEntityManagerFactory("SIKS");
-			 em = emf.createEntityManager();
-			 fazaService = new FazaService(getEm());
+			emf = Persistence.createEntityManagerFactory("SIKS");
+			em = emf.createEntityManager();
+			fazaService = new FazaService(getEm());
 			korakService = new KorakService(getEm());
 			modelZCSoftveraService = new ModelZCSoftveraService(getEm());
 			strukturaModelaService = new StrukturaModelaService(getEm());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}	
+		}
 
-		this.setSize(1000, 700 );
+		this.setSize(1000, 700);
 		this.setLocationRelativeTo(null);
 		this.setTitle("Standardizacija i kvalitet softvera Tim2");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,25 +117,25 @@ public class MainFrame extends JFrame {
 
 		treePanel.setPreferredSize(new Dimension(250, 600));
 		treePanel.setLayout(new BorderLayout());
-		getContentPane().add(treePanel, BorderLayout.WEST);		
-		
+		getContentPane().add(treePanel, BorderLayout.WEST);
+
 		buttonPanel.setLayout(new BorderLayout());
 		getContentPane().add(buttonPanel, BorderLayout.NORTH);
-		
-		
-		
-		/*graphPanel.setPreferredSize(new Dimension(225, 600));
-		graphPanel.setLayout(new BorderLayout());
-		getContentPane().add(graphPanel, BorderLayout.EAST);*/		
+
+		/*
+		 * graphPanel.setPreferredSize(new Dimension(225, 600));
+		 * graphPanel.setLayout(new BorderLayout());
+		 * getContentPane().add(graphPanel, BorderLayout.EAST);
+		 */
 
 		initTree();
-		
+
 		getContentPane().add(panel, BorderLayout.CENTER);
 		btnSet = new JButton(getActionManager().getSet());
 		panel.add(btnSet);
 		menu = new Menu();
 		setJMenuBar(menu);
-		
+
 	}
 
 	public void initTree() {
@@ -155,49 +157,50 @@ public class MainFrame extends JFrame {
 		 * BorderLayout.CENTER);
 		 */
 	}
-	
-	public void updateTree(){
+
+	public void updateTree() {
 		DefaultTreeModel root = new RootTreeModel();
 		treeView = new TreeView();
 
 		treeView.setModel(root);
-		
+
 		ModelZCSoftveraService mzcss = new ModelZCSoftveraService(getEm());
 		StrukturaModelaService sms = new StrukturaModelaService(getEm());
 		FazaService fs = new FazaService(getEm());
-		
-		List<ModelZCSoftvera> modelZCSoftveras  = (List<ModelZCSoftvera>) mzcss.findAllModelZcSoftvera();
-		List<StrukturaModela> struktureModela = (List<StrukturaModela>) sms.findAllStrukturaModela();
+
+		List<ModelZCSoftvera> modelZCSoftveras = (List<ModelZCSoftvera>) mzcss
+				.findAllModelZcSoftvera();
+		List<StrukturaModela> struktureModela = (List<StrukturaModela>) sms
+				.findAllStrukturaModela();
 		List<Faza> faze = (List<Faza>) fs.findAllFaze();
 
 		for (ModelZCSoftvera modelZCSoftvera : modelZCSoftveras) {
 
 			treeView.AddModelZC(modelZCSoftvera);
-			
-			
-			DefaultMutableTreeNode dNode,child;
-			RootTreeModel a = (RootTreeModel)root;
-				
-					for(StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()){
-						for(Faza f : faze){
-							if(struktura.getKorak().getFaza().id==f.id){
-								//System.out.println(f.getNazivFaze());
-								modelZCSoftvera.add(f);
-								if(f.getKoraci()!=null && f.getKoraci().size()>0){
-									for(Korak k: f.getKoraci()){
-										if(struktura.getKorak().getId() == k.getId())
-										f.add(k);
-									}
-								}
-									
+
+			DefaultMutableTreeNode dNode, child;
+			RootTreeModel a = (RootTreeModel) root;
+
+			for (StrukturaModela struktura : modelZCSoftvera
+					.getStrukturaModela()) {
+				for (Faza f : faze) {
+					if (struktura.getKorak().getFaza().id == f.id) {
+						// System.out.println(f.getNazivFaze());
+						modelZCSoftvera.add(f);
+						if (f.getKoraci() != null && f.getKoraci().size() > 0) {
+							for (Korak k : f.getKoraci()) {
+								if (struktura.getKorak().getId() == k.getId())
+									f.add(k);
 							}
 						}
-					
+
+					}
 				}
-			
+
+			}
+
 		}
-		
-		
+
 	}
 
 	public static EntityManagerFactory getEmf() {
@@ -215,31 +218,30 @@ public class MainFrame extends JFrame {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-	
-	public void addGraph(){
+
+	public void addGraph() {
 		BufferedImage graph;
 		File png = new File("GraphViz/graph.png");
 		try {
-			
-			//getDraw().draw();
+
+			// getDraw().draw();
 			graph = ImageIO.read(png);
 			JLabel graphLabel = new JLabel(new ImageIcon(graph));
 			panel.setBackground(Color.WHITE);
-			graphPanel.removeAll();			
-			
-			graphPanel.add(graphLabel);		
-			
+			graphPanel.removeAll();
+
+			graphPanel.add(graphLabel);
+
 			this.getPanel().removeAll();
 			panel.add(graphPanel, BorderLayout.EAST);
 			panel.updateUI();
-			
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	
 	public JPanel getPanel() {
 		return panel;
 	}
@@ -337,7 +339,13 @@ public class MainFrame extends JFrame {
 	public void setDialogDefine(DefineStructView dialogDefine) {
 		this.dialogDefine = dialogDefine;
 	}
-	
-	
-	
+
+	public NewModelDialog getNewModelDialog() {
+		return newModelDialog;
+	}
+
+	public void setNewModelDialog(NewModelDialog newModelDialog) {
+		this.newModelDialog = newModelDialog;
+	}
+
 }

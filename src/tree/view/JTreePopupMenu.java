@@ -26,11 +26,11 @@ public class JTreePopupMenu{
 		addFaza = new JMenuItem(MainFrame.getInstance().getActionManager().getAddNewFaza());
 		addKorak = new JMenuItem("Dodaj korak");
 		
-		addModelZC = new JMenuItem("Dodaj novi model");
+		addModelZC = new JMenuItem(MainFrame.getInstance().getActionManager().getAddNewModel());
 		
 		removeFaza = new JMenuItem("Obrisi fazu");
 		removeKorak = new JMenuItem("Obrisi korak");
-		removeModelZC = new JMenuItem("Obrisi novi model");
+		removeModelZC = new JMenuItem("Obrisi model");
 		defineModel = new JMenuItem(MainFrame.getInstance().getActionManager().getDefineStructGet());
 		
 		popupMenu = new JPopupMenu();

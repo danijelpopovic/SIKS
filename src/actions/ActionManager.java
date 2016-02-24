@@ -1,11 +1,11 @@
 package actions;
-import actions.*;
 
 public class ActionManager {
 
 	private AddNewFaza addNewFaza;
 	private AddNewKorak addNewKorak;
 	private AddNewModel addNewModel;
+	private AddNewModelSubmit addNewModelSubmit;
 	private SubmitAddFaza submitAddFaza;
 	private Set set;
 	private SetSubmit setSubmit;
@@ -24,6 +24,7 @@ public class ActionManager {
 		addNewFaza = new AddNewFaza();
 		addNewKorak = new AddNewKorak();
 		addNewModel = new AddNewModel();
+		addNewModelSubmit = new AddNewModelSubmit();
 		submitAddFaza = new SubmitAddFaza();
 		set = new Set();
 		setSubmit = new SetSubmit();
@@ -124,6 +125,12 @@ public class ActionManager {
 		this.defineStructSubmit = defineStructSubmit;
 	}
 	
-	
+	public AddNewModelSubmit getAddNewModelSubmit() {
+		return addNewModelSubmit;
+	}
+
+	public void setAddNewModelSubmit(AddNewModelSubmit addNewModelSubmit) {
+		this.addNewModelSubmit = addNewModelSubmit;
+	}
 	
 }

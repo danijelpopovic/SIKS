@@ -11,21 +11,19 @@ import model.Faza;
 import services.FazaService;
 import view.DialogKorak;
 
-public class KorakTable extends AbstractAction{
+public class KorakTable extends AbstractAction {
 
 	public DialogKorak dk;
-	
-	
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		dk = new DialogKorak(MainFrame.getInstance());
 		MainFrame.getInstance().setDialogKorak(dk);
 		FazaService fs = MainFrame.getInstance().getFazaService();
-		
+
 		List<Faza> faze = (List<Faza>) fs.findAllFaze();
-		for(Faza f : faze){
+		for (Faza f : faze) {
 			dk.getCmbFaza().addItem(f);
 		}
 	}
@@ -36,9 +34,7 @@ public class KorakTable extends AbstractAction{
 
 	public void setDk(DialogKorak dk) {
 		this.dk = dk;
-	
+
 	}
-	
-	
 
 }
