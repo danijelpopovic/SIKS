@@ -35,6 +35,9 @@ import util.DrawGraph;
 import util.JPAUtil;
 import view.DefineStructView;
 import view.DialogKorak;
+import view.FazaPropertiesDialog;
+import view.KorakPropertiesDialog;
+import view.ModelPropertiesDialog;
 import view.NewModelDialog;
 import view.SetView;
 import actions.ActionManager;
@@ -56,6 +59,9 @@ public class MainFrame extends JFrame {
 	private DialogKorak dialogKorak;
 	private NewModelDialog newModelDialog;
 	private DefineStructView dialogDefine;
+	private KorakPropertiesDialog korakProperties;
+	private FazaPropertiesDialog fazaProperties;
+	private ModelPropertiesDialog modelProperties;
 
 	private static DrawGraph draw = new DrawGraph();
 
@@ -346,6 +352,30 @@ public class MainFrame extends JFrame {
 
 	public void setNewModelDialog(NewModelDialog newModelDialog) {
 		this.newModelDialog = newModelDialog;
+	}
+
+	public KorakPropertiesDialog getKorakProperties() {
+		return korakProperties;
+	}
+
+	public void setKorakProperties(KorakPropertiesDialog korakProperties) {
+		this.korakProperties = korakProperties;
+	}
+
+	public FazaPropertiesDialog getFazaProperties() {
+		return fazaProperties;
+	}
+
+	public void setFazaProperties(FazaPropertiesDialog fazaProperties) {
+		this.fazaProperties = fazaProperties;
+	}
+
+	public ModelPropertiesDialog getModelProperties() {
+		return modelProperties;
+	}
+
+	public void setModelProperties(ModelPropertiesDialog modelProperties) {
+		this.modelProperties = modelProperties;
 	}
 
 }

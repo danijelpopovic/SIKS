@@ -60,27 +60,14 @@ public class TreeController implements MouseListener {
 
 			JTreePopupMenu jtreePmenu = new JTreePopupMenu();
 
-			if (node instanceof Faza) {
-				jtreePmenu.getAddKorak().setVisible(false);
-				jtreePmenu.getAddModelZC().setVisible(false);
-				jtreePmenu.getRemoveKorak().setVisible(false);
-				jtreePmenu.getRemoveModelZC().setVisible(false);
-				jtreePmenu.getRemoveFaza().setVisible(false);
-				jtreePmenu.getAddFaza().setVisible(false);
+			if (node instanceof Faza) {	
+				jtreePmenu.setVisible("faza");
 			} else if (node instanceof Korak) {
-				jtreePmenu.getAddKorak().setVisible(false);
-				jtreePmenu.getAddFaza().setVisible(false);
-				jtreePmenu.getAddModelZC().setVisible(false);
-				jtreePmenu.getRemoveFaza().setVisible(false);
-				jtreePmenu.getRemoveModelZC().setVisible(false);
+				jtreePmenu.setVisible("korak");
 			} else if (node instanceof ModelZCSoftvera) {
-				jtreePmenu.getDefineModel().setVisible(true);
-				jtreePmenu.getAddFaza().setVisible(false);
-				jtreePmenu.getAddKorak().setVisible(false);
-				jtreePmenu.getRemoveFaza().setVisible(false);
-				jtreePmenu.getRemoveKorak().setVisible(false);
-				jtreePmenu.getRemoveModelZC().setVisible(false);
-				jtreePmenu.getAddModelZC().setVisible(false);
+				jtreePmenu.setVisible("model");
+			} else {
+				jtreePmenu.setVisibleFalse();
 			}
 
 			jtreePmenu.show(e.getComponent(), e.getX(), e.getY());

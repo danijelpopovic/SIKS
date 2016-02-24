@@ -15,14 +15,17 @@ public class ActionManager {
 	private DefineStructGet defineStructGet;
 	private DefineStructSubmit defineStructSubmit;
 	private RemoveKorak removeKorak;
-	private RemoveModel removeModel;	
+	private RemoveModel removeModel;
+	private ModelProperties modelProperties;
+	private FazaProperties fazaProperties;
+	private KorakProperties korakProperties;
 
-	public ActionManager(){
+	public ActionManager() {
 		initialiseActions();
 	}
-	
+
 	private void initialiseActions() {
-		
+
 		addNewFaza = new AddNewFaza();
 		addNewKorak = new AddNewKorak();
 		addNewModel = new AddNewModel();
@@ -31,16 +34,17 @@ public class ActionManager {
 		set = new Set();
 		setSubmit = new SetSubmit();
 		setCancel = new SetCancel();
-		korakTable= new KorakTable();
+		korakTable = new KorakTable();
 		korakTableSubmit = new KorakTableSubmit();
 		defineStructGet = new DefineStructGet();
 		defineStructSubmit = new DefineStructSubmit();
 		removeKorak = new RemoveKorak();
 		removeModel = new RemoveModel();
+		modelProperties = new ModelProperties();
+		fazaProperties = new FazaProperties();
+		korakProperties = new KorakProperties();
 	}
 
-	
-	
 	public AddNewFaza getAddNewFaza() {
 		return addNewFaza;
 	}
@@ -128,7 +132,7 @@ public class ActionManager {
 	public void setDefineStructSubmit(DefineStructSubmit defineStructSubmit) {
 		this.defineStructSubmit = defineStructSubmit;
 	}
-	
+
 	public AddNewModelSubmit getAddNewModelSubmit() {
 		return addNewModelSubmit;
 	}
@@ -136,7 +140,7 @@ public class ActionManager {
 	public void setAddNewModelSubmit(AddNewModelSubmit addNewModelSubmit) {
 		this.addNewModelSubmit = addNewModelSubmit;
 	}
-	
+
 	public RemoveKorak getRemoveKorak() {
 		return removeKorak;
 	}
@@ -144,7 +148,7 @@ public class ActionManager {
 	public void setRemoveKorak(RemoveKorak removeKorak) {
 		this.removeKorak = removeKorak;
 	}
-	
+
 	public RemoveModel getRemoveModel() {
 		return removeModel;
 	}
@@ -152,5 +156,29 @@ public class ActionManager {
 	public void setRemoveModel(RemoveModel removeModel) {
 		this.removeModel = removeModel;
 	}
-	
+
+	public ModelProperties getModelProperties() {
+		return modelProperties;
+	}
+
+	public void setModelProperties(ModelProperties modelProperties) {
+		this.modelProperties = modelProperties;
+	}
+
+	public FazaProperties getFazaProperties() {
+		return fazaProperties;
+	}
+
+	public void setFazaProperties(FazaProperties fazaProperties) {
+		this.fazaProperties = fazaProperties;
+	}
+
+	public KorakProperties getKorakProperties() {
+		return korakProperties;
+	}
+
+	public void setKorakProperties(KorakProperties korakProperties) {
+		this.korakProperties = korakProperties;
+	}
+
 }
