@@ -25,6 +25,11 @@ public class TreeView extends JTree implements TreeSelectionListener{
 		SwingUtilities.updateComponentTreeUI(this);
 	}
 	
+	public void removeFaza(Faza p){
+		((RootTreeModel)getModel()).removeFaza(p);
+		SwingUtilities.updateComponentTreeUI(this);
+	}
+	
 	public void AddModelZC(ModelZCSoftvera modelZCSoftvera){
 		((RootTreeModel)getModel()).addModelZCSoftvera(modelZCSoftvera);
 		SwingUtilities.updateComponentTreeUI(this);

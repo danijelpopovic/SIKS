@@ -30,6 +30,10 @@ public class ModelZcTree implements TreeNode{
 	public void addFaza(Faza faza){
 		faze.add(faza);
 	}
+	
+	public void removeFaza(Faza faza){
+		faze.remove(faza);
+	}
 
 	@Override
 	public TreeNode getChildAt(int childIndex) {

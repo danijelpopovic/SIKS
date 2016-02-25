@@ -26,8 +26,7 @@ public class FazaService {
 		return emp;
 	}
 	
-	public Faza createFaza(int id, String naziv, int modelId) {
-				
+	public Faza createFaza(int id, String naziv, int modelId) {				
 		
 		em.getTransaction().begin();
 		Faza faza = new Faza(id);
@@ -49,9 +48,7 @@ public class FazaService {
 		struktura.setKorak(korak);
 		em.persist(struktura);
 		
-		em.getTransaction().commit();
-		
-		
+		em.getTransaction().commit();	
 		
 		return faza;
 	}
@@ -65,6 +62,15 @@ public class FazaService {
 
 	public Faza findFaza(int id) {
 		return em.find(Faza.class, id);
+	}
+	
+	public Faza updateFaza(int id, String naziv) {
+		em.getTransaction().begin();
+		Faza emp = em.find(Faza.class, id);
+		emp.setNazivFaze(naziv);
+		em.persist(emp);
+		em.getTransaction().commit();
+		return emp;
 	}
 
 	@SuppressWarnings("unchecked")

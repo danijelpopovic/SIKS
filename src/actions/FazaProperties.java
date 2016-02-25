@@ -38,12 +38,6 @@ public class FazaProperties extends AbstractAction {
 				dialog.getKoraci().addItem(k.getNaziv());			
 		}
 		
-		/*Set<Korak> koraci = ((Faza)o).getKoraci();
-		
-		for (Korak k : koraci) {
-			dialog.getKoraci().addItem(k.getNaziv());
-		}*/
-		
 		String naziv = ((Faza)o).getNazivFaze();		
 		
 		dialog.getLblNazivFaze().setText(naziv);

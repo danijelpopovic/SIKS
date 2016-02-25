@@ -26,10 +26,10 @@ public class KorakService {
 		return emp;
 	}
 	
-	public Korak updateKorak(int id, String naziv, Faza faza, int pozicija) {
+	public Korak updateKorak(int id, String naziv, Faza faza) {
 		em.getTransaction().begin();
 		Korak emp = em.find(Korak.class, id);
-		emp.setNaziv(naziv);		
+		emp.setNaziv(naziv);
 		emp.setFaza(faza);
 		em.persist(emp);
 		em.getTransaction().commit();

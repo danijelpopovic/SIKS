@@ -19,7 +19,6 @@ public class AddNewModel extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-
 		md = new NewModelDialog(MainFrame.getInstance());
 		MainFrame.getInstance().setNewModelDialog(md);
 	}

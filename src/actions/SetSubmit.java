@@ -58,7 +58,7 @@ public class SetSubmit extends AbstractAction{
 					for(Korak k : koraci){
 						if(model.getElementAt(i).equals(k.getNaziv())){
 							positon++;
-							ks.updateKorak(k.id, k.getNaziv(), f, positon);
+							ks.updateKorak(k.id, k.getNaziv(), f);
 							
 							if(i==model.getModel().size()-1)
 								sms.createStrukturaModela(0, ms, k, null);

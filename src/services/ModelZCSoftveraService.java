@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import model.Faza;
 import model.Korak;
 import model.ModelZCSoftvera;
 
@@ -42,6 +43,20 @@ public class ModelZCSoftveraService {
 			em.getTransaction().commit();
 		}
 
+	}
+	
+	public ModelZCSoftvera updateModelZCSoftvera(int id, String naziv,
+			String skraceniNaziv, String opis) {
+		em.getTransaction().begin();
+		ModelZCSoftvera emp = em.find(ModelZCSoftvera.class, id);
+		emp.setNaziv(naziv);
+		emp.setOpis(opis);
+		emp.setSkraceniNaziv(skraceniNaziv);
+
+		em.persist(emp);
+		em.getTransaction().commit();
+
+		return emp;
 	}
 
 	@SuppressWarnings("unchecked")

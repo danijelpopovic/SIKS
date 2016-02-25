@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import model.Korak;
-import model.ModelZCSoftvera;
 import view.KorakPropertiesDialog;
 
 public class KorakProperties extends AbstractAction {
@@ -27,8 +26,12 @@ public class KorakProperties extends AbstractAction {
 		Object o = MainFrame.getInstance().getTreeView()
 				.getLastSelectedPathComponent();
 		
+		System.out.println(((Korak)o).getFaza());
+		
 		String naziv = ((Korak)o).getNaziv();
 		String faza = ((Korak)o).getFaza().getNazivFaze();
+		
+		System.out.println(faza);
 		
 		dialog.getLblNazivKoraka().setText(naziv);
 		dialog.getLblFazaKoraka().setText(faza);

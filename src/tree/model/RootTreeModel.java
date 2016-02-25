@@ -104,13 +104,16 @@ public class RootTreeModel extends DefaultTreeModel{
 		((ModelZcTree)getRoot()).addFaza(faza);
 	}
 	
+	public void removeFaza(Faza faza){
+		((ModelZcTree)getRoot()).removeFaza(faza);
+	}
+	
 	public void addKorak(Korak korak){
 		((FazaTree)getRoot()).addKorak(korak);
 	}
 	
 	public void removeModelZCSoftvera(ModelZCSoftvera modelZCSoftvera){
 		((RootTree)getRoot()).removeModelZCSoftvera(modelZCSoftvera);
-	}
-	
+	}	
 	
 }
