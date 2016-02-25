@@ -17,7 +17,6 @@ public class JTreePopupMenu {
 	JMenuItem addModelZC;
 	JMenuItem defineModel;
 
-	JMenuItem removeFaza;
 	JMenuItem removeKorak;
 	JMenuItem removeModelZC;
 
@@ -33,34 +32,31 @@ public class JTreePopupMenu {
 		addModelZC = new JMenuItem(MainFrame.getInstance().getActionManager()
 				.getAddNewModel());
 
-		removeFaza = new JMenuItem("Obrisi fazu");
 		removeKorak = new JMenuItem("Obrisi korak");
-		removeModelZC = new JMenuItem(MainFrame.getInstance().getActionManager()
-				.getRemoveModel());
+		removeModelZC = new JMenuItem(MainFrame.getInstance()
+				.getActionManager().getRemoveModel());
 		defineModel = new JMenuItem(MainFrame.getInstance().getActionManager()
 				.getDefineStructGet());
 
-		modelProperties = new JMenuItem(MainFrame.getInstance().getActionManager()
-				.getModelProperties());
-		fazaProperties = new JMenuItem(MainFrame.getInstance().getActionManager()
-				.getFazaProperties());
-		korakProperties = new JMenuItem(MainFrame.getInstance().getActionManager()
-				.getKorakProperties());
+		modelProperties = new JMenuItem(MainFrame.getInstance()
+				.getActionManager().getModelProperties());
+		fazaProperties = new JMenuItem(MainFrame.getInstance()
+				.getActionManager().getFazaProperties());
+		korakProperties = new JMenuItem(MainFrame.getInstance()
+				.getActionManager().getKorakProperties());
 
 		popupMenu = new JPopupMenu();
 
 		popupMenu.add(addModelZC);
 		popupMenu.add(removeModelZC);
 		popupMenu.add(defineModel);
-		
 
 		popupMenu.add(addKorak);
 		popupMenu.add(removeKorak);
 		popupMenu.add(korakProperties);
 
 		popupMenu.add(addFaza);
-		popupMenu.add(removeFaza);
-		
+
 		popupMenu.add(modelProperties);
 		popupMenu.add(fazaProperties);
 		popupMenu.add(korakProperties);
@@ -78,7 +74,6 @@ public class JTreePopupMenu {
 
 		if (type.equals("faza")) {
 			setVisibleFalse();
-			removeFaza.setVisible(true);
 			fazaProperties.setVisible(true);
 		}
 
@@ -95,7 +90,6 @@ public class JTreePopupMenu {
 		addKorak.setVisible(false);
 		addModelZC.setVisible(false);
 		defineModel.setVisible(false);
-		removeFaza.setVisible(false);
 		removeKorak.setVisible(false);
 		removeModelZC.setVisible(false);
 		modelProperties.setVisible(false);
@@ -138,14 +132,6 @@ public class JTreePopupMenu {
 
 	public void setAddModelZC(JMenu addModelZC) {
 		this.addModelZC = addModelZC;
-	}
-
-	public JMenuItem getRemoveFaza() {
-		return removeFaza;
-	}
-
-	public void setRemoveFaza(JMenuItem removeFaza) {
-		this.removeFaza = removeFaza;
 	}
 
 	public JMenuItem getRemoveKorak() {

@@ -29,15 +29,15 @@ public class Menu extends JMenuBar{
 		model.add(dodajModel);
 		add(model);
 		
-		struktura = new JMenu("Struktura");		
+		/*struktura = new JMenu("Struktura");		
 		
 		dodajStrukturu = new JMenuItem("Dodaj strukturu");
 		dodajStrukturu.addActionListener(new Set());
 		struktura.add(dodajStrukturu);
 		
-		add(struktura);
+		add(struktura);*/
 		
-		korak = new JMenu("Koraci");
+		korak = new JMenu("Korak");
 		
 		korakView = new JMenuItem("Pregled");
 		korakView.addActionListener(new KorakTable());

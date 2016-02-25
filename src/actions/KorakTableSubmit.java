@@ -73,8 +73,7 @@ public class KorakTableSubmit extends AbstractAction{
 		faza = fs.createFaza(0, nazivFaza);
 	}
 	
-	ks.createKorak(0, nazivKoraka, faza);
-	
+	ks.createKorak(0, nazivKoraka, faza);	
 	
 	MainFrame.getInstance().getDialogKorak().dispose();
 	dk = new DialogKorak(MainFrame.getInstance());

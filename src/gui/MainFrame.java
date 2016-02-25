@@ -56,7 +56,6 @@ public class MainFrame extends JFrame {
 	private JPanel graphPanel = new JPanel();
 	private JPanel panel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
-	private JButton btnSet;// = new JButton("Set");
 	private SetView setView;
 	private DialogKorak dialogKorak;
 	private NewModelDialog newModelDialog;
@@ -139,8 +138,6 @@ public class MainFrame extends JFrame {
 		initTree();
 
 		getContentPane().add(panel, BorderLayout.CENTER);
-		btnSet = new JButton(getActionManager().getSet());
-		panel.add(btnSet);
 		menu = new Menu();
 		setJMenuBar(menu);
 
