@@ -4,10 +4,12 @@ import gui.MainFrame;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,16 +20,12 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
-import net.miginfocom.swing.MigLayout;
 import model.table.Korak;
+import net.miginfocom.swing.MigLayout;
 
-import javax.swing.JComboBox;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
+public class DialogKorak extends JDialog {
 
-public class DialogKorak extends JDialog{
-
-	public Korak tableModel;
+	public model.table.Korak tableModel;
 	public JPanel panDetail;
 	public JPanel panTable;
 	public JSplitPane splitPane;
@@ -37,34 +35,37 @@ public class DialogKorak extends JDialog{
 	private JTextField textFaza;
 	public JComboBox cmbFazaAkcija;
 	public JComboBox cmbFaza;
-	
-	public DialogKorak(JFrame parent){
-		
+	public JButton btnObrisi;
+
+	public DialogKorak(JFrame parent) {
+
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle("Koraci");
 		panTable = new JPanel(new BorderLayout());
 		panTable.setBackground(Color.WHITE);
-		
+
 		columns = new String[3];
 		columns[0] = "id";
 		columns[1] = "naziv";
 		columns[2] = "faza";
-		
-		
-		tableModel = new Korak(columns, 0);
-		
-		//Kreiranje tabele
+
+		tableModel = new model.table.Korak(columns, 0);
+
+		// Kreiranje tabele
 		table = new JTable(tableModel);
 		table.setAutoCreateRowSorter(true);
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setColumnSelectionAllowed(false);
-		
-		panTable.add(new JScrollPane(table,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS),BorderLayout.CENTER);
 
-		
+		panTable.add(new JScrollPane(table,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS), BorderLayout.CENTER);
+
 		panDetail = new JPanel();
-		panDetail.setLayout(new MigLayout("", "[64.00px][169.00px,grow][63.00px,grow]", "[20.00px][23px][30.00px,grow]"));
+		panDetail.setLayout(new MigLayout("",
+				"[64.00px][169.00px,grow][63.00px,grow]",
+				"[20.00px][23px][30.00px,grow]"));
 		JLabel label = new JLabel("");
 		panDetail.add(label, "cell 0 0,grow");
 		JLabel label_2 = new JLabel("");
@@ -76,61 +77,69 @@ public class DialogKorak extends JDialog{
 		txtNaziv = new JTextField();
 		panDetail.add(txtNaziv, "cell 1 1,grow");
 		txtNaziv.setColumns(10);
-		
-		JButton btnSave = new JButton(MainFrame.getInstance().getActionManager().getKorakTableSubmit());
+
+		Dimension size = new Dimension(150, 25);
+
+		JButton btnSave = new JButton(MainFrame.getInstance()
+				.getActionManager().getKorakTableSubmit());
+		btnSave.setPreferredSize(size);
+		btnSave.setMaximumSize(size);
 		panDetail.add(btnSave, "cell 2 1,grow");
-		
-		
-		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT,panTable,panDetail);
-		
+
+		btnObrisi = new JButton(MainFrame.getInstance().getActionManager()
+				.getRemoveKorak());
+		btnObrisi.setPreferredSize(size);
+		btnObrisi.setMaximumSize(size);
+		panDetail.add(btnObrisi, "cell 2 2,grow");
+
+		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, panTable,
+				panDetail);
+
 		JLabel lblFaza = new JLabel("Faza");
 		panDetail.add(lblFaza, "cell 0 2");
-		
+
 		JPanel panel = new JPanel();
 		panDetail.add(panel, "cell 1 2,grow");
 		panel.setLayout(new MigLayout("", "[grow][][grow]", "[]"));
-		
+
 		cmbFazaAkcija = new JComboBox();
 		cmbFazaAkcija.addItem("Postojeca");
 		cmbFazaAkcija.addItem("Nova");
-		
-		
+
 		textFaza = new JTextField();
 		panel.add(textFaza, "cell 2 0,growx");
 		textFaza.setVisible(false);
 		textFaza.setColumns(10);
-		
+
 		cmbFaza = new JComboBox();
 		panel.add(cmbFaza, "cell 2 0,growx");
-			
-		
+
 		splitPane.setResizeWeight(0.5);
 
-		
 		cmbFazaAkcija.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(cmbFazaAkcija.getSelectedIndex()==0){
+				if (cmbFazaAkcija.getSelectedIndex() == 0) {
 					textFaza.setVisible(false);
-					cmbFaza.setVisible(true);					
-				}else if(cmbFazaAkcija.getSelectedIndex()==1){
+					cmbFaza.setVisible(true);
+				} else if (cmbFazaAkcija.getSelectedIndex() == 1) {
 					textFaza.setVisible(true);
 					cmbFaza.setVisible(false);
 				}
 			}
 		});
-		
+
 		panel.add(cmbFazaAkcija, "cell 0 0 2 1,growx");
-		
-		getContentPane().add(splitPane,BorderLayout.CENTER);
-		
+
+		getContentPane().add(splitPane, BorderLayout.CENTER);
+
 		tableModel.open();
-		
+
 		pack();
-	    setLocationRelativeTo(parent);
-	    setVisible(true);
+		setLocationRelativeTo(parent);
+		setVisible(true);
 	}
 
 	public JTextField getTxtNaziv() {
@@ -165,7 +174,20 @@ public class DialogKorak extends JDialog{
 		this.cmbFaza = cmbFaza;
 	}
 
-	
-	
-	
+	public JTable getTable() {
+		return table;
+	}
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+	public Korak getTableModel() {
+		return tableModel;
+	}
+
+	public void setTableModel(Korak tableModel) {
+		this.tableModel = tableModel;
+	}
+
 }

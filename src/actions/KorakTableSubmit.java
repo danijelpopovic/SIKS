@@ -21,7 +21,7 @@ public class KorakTableSubmit extends AbstractAction{
 	public DialogKorak dk;
 	
 	public KorakTableSubmit(){
-		putValue(NAME, "Snimi");
+		putValue(NAME, "Snimi korak");
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {

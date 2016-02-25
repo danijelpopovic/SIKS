@@ -55,6 +55,7 @@ public class Korak extends DialogTableModel{
 	@Override
 	public void deleteRow(int index) {
 		// TODO Auto-generated method stub
+		this.removeRow(index);
 		
 	}
 
