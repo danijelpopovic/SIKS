@@ -69,7 +69,7 @@ public class JTreePopupMenu {
 
 		if (type.equals("model")) {
 			setVisibleFalse();
-			addKorak.setVisible(true);
+			addKorak.setVisible(false);
 			removeModelZC.setVisible(true);
 			defineModel.setVisible(true);
 			editModel.setVisible(true);

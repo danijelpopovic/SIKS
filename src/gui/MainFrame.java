@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -50,7 +51,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static MainFrame instance = null;
 	public static int init = 0;
-	private JPanel treePanel = new JPanel();
+	private JPanel treePanel;// = new JPanel();
 	private JPanel graphPanel = new JPanel();
 	private JPanel panel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
@@ -121,6 +122,7 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout(5, 5));
 
+		treePanel = new JPanel();
 		treePanel.setPreferredSize(new Dimension(250, 600));
 		treePanel.setLayout(new BorderLayout());
 		getContentPane().add(treePanel, BorderLayout.WEST);
@@ -141,12 +143,15 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menu);
 
 	}
+	
+	
 
 	public void initTree() {
 
-		updateTree();
+		DefaultTreeModel root = new RootTreeModel();
+		updateTree(root);
 		JScrollPane scrollPane = new JScrollPane(treeView);
-		treePanel.add(scrollPane, BorderLayout.CENTER);
+		getTreePanel().add(scrollPane, BorderLayout.CENTER);
 
 		/*
 		 * DefaultMutableTreeNode rootNode = new
@@ -162,15 +167,15 @@ public class MainFrame extends JFrame {
 		 */
 	}
 
-	public void updateTree() {
-		DefaultTreeModel root = new RootTreeModel();
+	public void updateTree(DefaultTreeModel root) {
+		
 		treeView = new TreeView();
 
 		treeView.setModel(root);
 
-		ModelZCSoftveraService mzcss = new ModelZCSoftveraService(getEm());
-		StrukturaModelaService sms = new StrukturaModelaService(getEm());
-		FazaService fs = new FazaService(getEm());
+		ModelZCSoftveraService mzcss = getModelZCSoftveraService();
+		StrukturaModelaService sms = getStrukturaModelaService();
+		FazaService fs = getFazaService();
 
 		List<ModelZCSoftvera> modelZCSoftveras = (List<ModelZCSoftvera>) mzcss
 				.findAllModelZcSoftvera();
@@ -185,30 +190,39 @@ public class MainFrame extends JFrame {
 			DefaultMutableTreeNode dNode, child;
 			RootTreeModel a = (RootTreeModel) root;
 
-			for (StrukturaModela struktura : modelZCSoftvera
-					.getStrukturaModela()) {
+			List<Faza> faze2 = new ArrayList<Faza>();
+			List<Korak> koraci = new ArrayList<Korak>();
+			
+			
+			for (StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()) {
 
 				Faza f = struktura.getKorak().getFaza();
-				Faza fn = new Faza(f.getId(), f.getNazivFaze());
-				modelZCSoftvera.add(fn);
-				fn.add(new Korak(struktura.getKorak().getId(), struktura
-						.getKorak().getNaziv(), null));
-				fn.add(new Korak(struktura.getSledeci_korak().getId(),
-						struktura.getSledeci_korak().getNaziv(), null));
-
-				/*
-				 * for (Faza f : faze) { if (struktura.getKorak().getFaza().id
-				 * == f.id) { // System.out.println(f.getNazivFaze());
-				 * modelZCSoftvera.add(f); if (f.getKoraci() != null &&
-				 * f.getKoraci().size() > 0) { for (Korak k : f.getKoraci()) {
-				 * if (struktura.getKorak().getId() == k.getId()) f.add(k);
-				 * 
-				 * } }
-				 * 
-				 * } }
-				 */
+				Faza f2 = struktura.getSledeci_korak().getFaza();
+				//modelZCSoftvera.add(fn);
+				
+				if(!faze2.contains(f))
+					faze2.add(f);
+				
+				if(!faze2.contains(f2))
+					faze2.add(f2);
+				
+				if(!koraci.contains(struktura.getKorak()))
+					koraci.add(struktura.getKorak());
+				if(!koraci.contains(struktura.getSledeci_korak()))
+					koraci.add(struktura.getSledeci_korak());		
+				
 
 			}
+			
+			for(Faza f : faze2){
+				Faza fn = new Faza(f.getId(), f.getNazivFaze());
+				modelZCSoftvera.add(fn);
+				for(Korak k : koraci){
+					if(fn.getId() == k.getFaza().getId())
+						fn.add(new Korak(k.getId(), k.getNaziv(), null));
+				}
+			}
+			
 
 		}
 
@@ -391,4 +405,15 @@ public class MainFrame extends JFrame {
 		this.editModelDialog = editDialog;
 	}
 
+
+	public JPanel getTreePanel() {
+		return treePanel;
+	}
+
+	public void setTreePanel(JPanel treePanel) {
+		this.treePanel = treePanel;
+	}
+
+	
+	
 }
