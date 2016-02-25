@@ -24,9 +24,7 @@ import view.SortedListModel;
 
 import java.util.Set;
 
-public class SetSubmit extends AbstractAction{
-
-	
+public class SetSubmit extends AbstractAction{	
 	
 	public SetSubmit(){
 		putValue(NAME, "Ok");

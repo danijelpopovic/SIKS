@@ -35,7 +35,8 @@ public class JTreePopupMenu {
 
 		removeFaza = new JMenuItem("Obrisi fazu");
 		removeKorak = new JMenuItem("Obrisi korak");
-		removeModelZC = new JMenuItem("Obrisi model");
+		removeModelZC = new JMenuItem(MainFrame.getInstance().getActionManager()
+				.getRemoveModel());
 		defineModel = new JMenuItem(MainFrame.getInstance().getActionManager()
 				.getDefineStructGet());
 

@@ -15,14 +15,14 @@ public class ModelZCSoftveraService {
 		this.em = em;
 	}
 
-	public ModelZCSoftvera createModelZcSoftvera(int id,
-			String naziv, String skraceniNaziv, String opis) {
+	public ModelZCSoftvera createModelZcSoftvera(int id, String naziv,
+			String skraceniNaziv, String opis) {
 		em.getTransaction().begin();
 		ModelZCSoftvera emp = new ModelZCSoftvera(id);
 		emp.setNaziv(naziv);
 		emp.setOpis(opis);
 		emp.setSkraceniNaziv(skraceniNaziv);
-		
+
 		em.persist(emp);
 		em.getTransaction().commit();
 
@@ -32,14 +32,16 @@ public class ModelZCSoftveraService {
 	public ModelZCSoftvera findModelZcSoftvera(int id) {
 		return em.find(ModelZCSoftvera.class, id);
 	}
-	
+
 	public void removeModelZCSoftvera(int id) {
-		em.getTransaction().begin();
+
 		ModelZCSoftvera emp = findModelZcSoftvera(id);
 		if (emp != null) {
+			em.getTransaction().begin();
 			em.remove(emp);
+			em.getTransaction().commit();
 		}
-		em.getTransaction().commit();
+
 	}
 
 	@SuppressWarnings("unchecked")

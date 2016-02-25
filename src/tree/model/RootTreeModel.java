@@ -108,5 +108,9 @@ public class RootTreeModel extends DefaultTreeModel{
 		((FazaTree)getRoot()).addKorak(korak);
 	}
 	
+	public void removeModelZCSoftvera(ModelZCSoftvera modelZCSoftvera){
+		((RootTree)getRoot()).removeModelZCSoftvera(modelZCSoftvera);
+	}
+	
 	
 }

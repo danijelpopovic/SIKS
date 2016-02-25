@@ -28,6 +28,10 @@ public class RootTree implements TreeNode{
 		modelZCSoftveras.add(model);
 	}
 	
+	public void removeModelZCSoftvera(ModelZCSoftvera model){
+		modelZCSoftveras.remove(model);
+	}
+	
 /*	@SuppressWarnings("rawtypes")
 	public Enumeration<ModelZCSoftvera> children() {
 		

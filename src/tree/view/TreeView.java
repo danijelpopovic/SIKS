@@ -34,6 +34,11 @@ public class TreeView extends JTree implements TreeSelectionListener{
 		((RootTreeModel)getModel()).addKorak(k);
 		SwingUtilities.updateComponentTreeUI(this);
 	}
+	
+	public void RemoveModelZC(ModelZCSoftvera modelZCSoftvera){
+		((RootTreeModel)getModel()).removeModelZCSoftvera(modelZCSoftvera);
+		SwingUtilities.updateComponentTreeUI(this);
+	}
 
 	@Override
 	public void valueChanged(TreeSelectionEvent e) {
