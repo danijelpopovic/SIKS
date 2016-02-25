@@ -56,7 +56,7 @@ public class RemoveStruktura extends AbstractAction {
 
 				Faza f = struktura.getKorak().getFaza();
 				Faza f2 = struktura.getSledeci_korak().getFaza();
-				//modelZCSoftvera.add(fn);
+				
 				
 				if(!faze2.contains(f))
 					faze2.add(f);
