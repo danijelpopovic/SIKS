@@ -18,7 +18,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 
 import model.Faza;
@@ -32,7 +31,6 @@ import services.StrukturaModelaService;
 import tree.model.RootTreeModel;
 import tree.view.TreeView;
 import util.DrawGraph;
-import util.JPAUtil;
 import view.DefineStructView;
 import view.DialogKorak;
 import view.EditModelDialog;
@@ -51,7 +49,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static MainFrame instance = null;
 	public static int init = 0;
-	private JPanel treePanel;// = new JPanel();
+	private JPanel treePanel;
 	private JPanel graphPanel = new JPanel();
 	private JPanel panel = new JPanel();
 	private JPanel buttonPanel = new JPanel();
@@ -104,7 +102,6 @@ public class MainFrame extends JFrame {
 		actionManager = new ActionManager();
 
 		try {
-			JPAUtil util = new JPAUtil();
 			emf = Persistence.createEntityManagerFactory("SIKS");
 			em = emf.createEntityManager();
 			fazaService = new FazaService(getEm());
@@ -118,8 +115,13 @@ public class MainFrame extends JFrame {
 
 		this.setSize(1000, 700);
 		this.setLocationRelativeTo(null);
-		this.setTitle("Standardizacija i kvalitet softvera Tim2");
+		this.setTitle("Modelar zivotnog ciklusa softvera Tim 2");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
+		this.setGraph();
+
 		getContentPane().setLayout(new BorderLayout(5, 5));
 
 		treePanel = new JPanel();
@@ -130,12 +132,6 @@ public class MainFrame extends JFrame {
 		buttonPanel.setLayout(new BorderLayout());
 		getContentPane().add(buttonPanel, BorderLayout.NORTH);
 
-		/*
-		 * graphPanel.setPreferredSize(new Dimension(225, 600));
-		 * graphPanel.setLayout(new BorderLayout());
-		 * getContentPane().add(graphPanel, BorderLayout.EAST);
-		 */
-
 		initTree();
 
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -143,8 +139,6 @@ public class MainFrame extends JFrame {
 		setJMenuBar(menu);
 
 	}
-	
-	
 
 	public void initTree() {
 
@@ -153,76 +147,54 @@ public class MainFrame extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(treeView);
 		getTreePanel().add(scrollPane, BorderLayout.CENTER);
 
-		/*
-		 * DefaultMutableTreeNode rootNode = new
-		 * DefaultMutableTreeNode("Root Node"); DefaultTreeModel treeModel = new
-		 * DefaultTreeModel(rootNode); //treeModel.addTreeModelListener(new
-		 * MyTreeModelListener());
-		 * 
-		 * JTree tree = new JTree(treeModel); tree.setEditable(true);
-		 * tree.getSelectionModel().setSelectionMode
-		 * (TreeSelectionModel.SINGLE_TREE_SELECTION);
-		 * tree.setShowsRootHandles(true); treePanel.add(tree,
-		 * BorderLayout.CENTER);
-		 */
 	}
 
 	public void updateTree(DefaultTreeModel root) {
-		
+
 		treeView = new TreeView();
 
 		treeView.setModel(root);
 
 		ModelZCSoftveraService mzcss = getModelZCSoftveraService();
-		StrukturaModelaService sms = getStrukturaModelaService();
-		FazaService fs = getFazaService();
 
 		List<ModelZCSoftvera> modelZCSoftveras = (List<ModelZCSoftvera>) mzcss
 				.findAllModelZcSoftvera();
-		List<StrukturaModela> struktureModela = (List<StrukturaModela>) sms
-				.findAllStrukturaModela();
-		List<Faza> faze = (List<Faza>) fs.findAllFaze();
 
 		for (ModelZCSoftvera modelZCSoftvera : modelZCSoftveras) {
 
 			treeView.AddModelZC(modelZCSoftvera);
 
-			DefaultMutableTreeNode dNode, child;
-			RootTreeModel a = (RootTreeModel) root;
-
 			List<Faza> faze2 = new ArrayList<Faza>();
 			List<Korak> koraci = new ArrayList<Korak>();
-			
-			
-			for (StrukturaModela struktura : modelZCSoftvera.getStrukturaModela()) {
+
+			for (StrukturaModela struktura : modelZCSoftvera
+					.getStrukturaModela()) {
 
 				Faza f = struktura.getKorak().getFaza();
 				Faza f2 = struktura.getSledeci_korak().getFaza();
-				//modelZCSoftvera.add(fn);
-				
-				if(!faze2.contains(f))
+				// modelZCSoftvera.add(fn);
+
+				if (!faze2.contains(f))
 					faze2.add(f);
-				
-				if(!faze2.contains(f2))
+
+				if (!faze2.contains(f2))
 					faze2.add(f2);
-				
-				if(!koraci.contains(struktura.getKorak()))
+
+				if (!koraci.contains(struktura.getKorak()))
 					koraci.add(struktura.getKorak());
-				if(!koraci.contains(struktura.getSledeci_korak()))
-					koraci.add(struktura.getSledeci_korak());		
-				
+				if (!koraci.contains(struktura.getSledeci_korak()))
+					koraci.add(struktura.getSledeci_korak());
 
 			}
-			
-			for(Faza f : faze2){
+
+			for (Faza f : faze2) {
 				Faza fn = new Faza(f.getId(), f.getNazivFaze());
 				modelZCSoftvera.add(fn);
-				for(Korak k : koraci){
-					if(fn.getId() == k.getFaza().getId())
+				for (Korak k : koraci) {
+					if (fn.getId() == k.getFaza().getId())
 						fn.add(new Korak(k.getId(), k.getNaziv(), null));
 				}
 			}
-			
 
 		}
 
@@ -232,6 +204,7 @@ public class MainFrame extends JFrame {
 		return emf;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setEmf(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
@@ -240,6 +213,7 @@ public class MainFrame extends JFrame {
 		return em;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
@@ -253,6 +227,29 @@ public class MainFrame extends JFrame {
 			graph = ImageIO.read(png);
 			JLabel graphLabel = new JLabel(new ImageIcon(graph));
 			panel.setBackground(Color.WHITE);
+			graphPanel.removeAll();
+
+			graphPanel.add(graphLabel);
+
+			this.getPanel().removeAll();
+			panel.add(graphPanel, BorderLayout.EAST);
+			panel.updateUI();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public void setGraph() {
+		BufferedImage graph;
+		File png = new File("Icon/team2.png");
+		try {
+
+			// getDraw().draw();
+			graph = ImageIO.read(png);
+			JLabel graphLabel = new JLabel(new ImageIcon(graph));
+			graphLabel.setBackground(Color.WHITE);
 			graphPanel.removeAll();
 
 			graphPanel.add(graphLabel);
@@ -319,6 +316,7 @@ public class MainFrame extends JFrame {
 		return fazaService;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setFazaService(FazaService fazaService) {
 		this.fazaService = fazaService;
 	}
@@ -327,6 +325,7 @@ public class MainFrame extends JFrame {
 		return korakService;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setKorakService(KorakService korakService) {
 		this.korakService = korakService;
 	}
@@ -335,6 +334,7 @@ public class MainFrame extends JFrame {
 		return modelZCSoftveraService;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setModelZCSoftveraService(
 			ModelZCSoftveraService modelZCSoftveraService) {
 		this.modelZCSoftveraService = modelZCSoftveraService;
@@ -344,6 +344,7 @@ public class MainFrame extends JFrame {
 		return strukturaModelaService;
 	}
 
+	@SuppressWarnings("static-access")
 	public void setStrukturaModelaService(
 			StrukturaModelaService strukturaModelaService) {
 		this.strukturaModelaService = strukturaModelaService;
@@ -405,7 +406,6 @@ public class MainFrame extends JFrame {
 		this.editModelDialog = editDialog;
 	}
 
-
 	public JPanel getTreePanel() {
 		return treePanel;
 	}
@@ -414,6 +414,4 @@ public class MainFrame extends JFrame {
 		this.treePanel = treePanel;
 	}
 
-	
-	
 }

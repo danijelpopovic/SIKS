@@ -7,6 +7,10 @@ import javax.swing.table.DefaultTableModel;
 public abstract class DialogTableModel extends DefaultTableModel {
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -359194162470452051L;
 	public DialogTableModel(Object[] colNames, int rowCount){
 		super(colNames, rowCount);
 	}
@@ -16,13 +20,7 @@ public abstract class DialogTableModel extends DefaultTableModel {
 	public abstract boolean isCellEditable(int arg0, int arg1);
 	public abstract void checkRow(int index);
 	public abstract void deleteRow(int index);
-	//public abstract int sortedInsert(String sifra, String naziv); 
-	//public abstract void updateRow(int index, String sifra, String naziv) throws SQLException;
-	//public abstract int insertRow(String sifra, String naziv) throws SQLException;
-	//public abstract void openAsChildForm(String where) throws SQLException;
-
-	public abstract void open(int id);
-	
+	public abstract void open(int id);	
 	
 }
 

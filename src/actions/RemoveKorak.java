@@ -15,8 +15,13 @@ import view.DialogKorak;
 
 public class RemoveKorak extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8188055411411217136L;
+
 	public RemoveKorak() {
-		putValue(NAME, "Obrisi korak");
+		putValue(NAME, "Obriši korak");
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public class RemoveKorak extends AbstractAction {
 					JOptionPane
 							.showMessageDialog(
 									null,
-									"Nije dozvoljeno brisanje koraka, jer se nalazi u modelu",
+									"Nije dozvoljeno brisanje koraka jer se nalazi u modelu",
 									"Upozorenje",
 									JOptionPane.INFORMATION_MESSAGE);
 					return;

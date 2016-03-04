@@ -13,8 +13,13 @@ import services.ModelZCSoftveraService;
 
 public class AddNewModelSubmit extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5934910250924432221L;
+
 	public AddNewModelSubmit() {
-		putValue(NAME, "Snimi");
+		putValue(NAME, "Sačuvaj model");
 	}
 
 	@Override
@@ -35,7 +40,7 @@ public class AddNewModelSubmit extends AbstractAction {
 		
 		for (ModelZCSoftvera m : modeli) {
 			if (m.getNaziv().equals(naziv)) {
-				JOptionPane.showMessageDialog(null, "Vec postoji model sa zadatim nazivom", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Već postoji model sa zadatim nazivom", "Upozorenje", JOptionPane.ERROR_MESSAGE);
 				return;
 			}				
 		}

@@ -13,8 +13,13 @@ import view.DialogKorak;
 
 public class KorakTable extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5769143830087439121L;
 	public DialogKorak dk;
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

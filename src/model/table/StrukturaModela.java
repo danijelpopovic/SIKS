@@ -8,6 +8,11 @@ import gui.tablemodel.DialogTableModel;
 
 public class StrukturaModela extends DialogTableModel{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4863847421857844330L;
+
 	public StrukturaModela(Object[] colNames, int rowCount) {
 		super(colNames, rowCount);
 		// TODO Auto-generated constructor stub

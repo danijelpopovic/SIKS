@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 public class DBConnection {
 
 	private static Connection conn;
-	//private static final String LOCK_TIMEOUT_INTERVAL = "5000";
 
 	public static Connection getConnection() {
 		if (conn == null)

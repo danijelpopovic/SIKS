@@ -5,7 +5,6 @@ import java.util.Enumeration;
 
 import javax.swing.tree.TreeNode;
 
-import model.Faza;
 import model.Korak;
 
 public class FazaTree implements TreeNode{
@@ -58,6 +57,7 @@ public class FazaTree implements TreeNode{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Enumeration<Korak> children() {
 		// TODO Auto-generated method stub

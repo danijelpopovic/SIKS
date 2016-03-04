@@ -10,6 +10,10 @@ import view.NewModelDialog;
 
 public class AddNewModel extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8432984352187983328L;
 	public NewModelDialog md;
 	
 	public AddNewModel(){

@@ -11,18 +11,22 @@ import javax.swing.JOptionPane;
 
 import model.Faza;
 import model.Korak;
-import model.ModelZCSoftvera;
 import services.FazaService;
 import services.KorakService;
 import view.DialogKorak;
 
 public class KorakTableSubmit extends AbstractAction{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6739601732455147085L;
 	public DialogKorak dk;
 	
 	public KorakTableSubmit(){
-		putValue(NAME, "Snimi korak");
+		putValue(NAME, "Sačuvaj korak");
 	}
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -66,7 +70,7 @@ public class KorakTableSubmit extends AbstractAction{
 		}
 		for (Faza f : fazeProvera) {
 			if (f.getNazivFaze().equals(nazivFaza)) {
-				JOptionPane.showMessageDialog(null, "Vec postoji faza sa zadatim nazivom", "Upozorenje", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Već postoji faza sa zadatim nazivom", "Upozorenje", JOptionPane.ERROR_MESSAGE);
 				return;
 			}				
 		}

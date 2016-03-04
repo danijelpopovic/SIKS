@@ -5,6 +5,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 
 public class Korak extends DefaultMutableTreeNode {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -236152041656628605L;
+
 	public int id;
 
 	public String naziv;

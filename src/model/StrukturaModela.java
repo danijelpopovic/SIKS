@@ -2,13 +2,18 @@ package model;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-public class StrukturaModela extends DefaultMutableTreeNode{
+public class StrukturaModela extends DefaultMutableTreeNode {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7782165421312295232L;
 
 	public int id;
 
 	public ModelZCSoftvera model;
 
-	public Korak korak;	
+	public Korak korak;
 
 	public Korak sledeci_korak;
 
@@ -34,7 +39,7 @@ public class StrukturaModela extends DefaultMutableTreeNode{
 
 	public void setKorak(Korak korak) {
 		this.korak = korak;
-	}	
+	}
 
 	public Korak getSledeci_korak() {
 		return sledeci_korak;
@@ -54,14 +59,14 @@ public class StrukturaModela extends DefaultMutableTreeNode{
 	}
 
 	public StrukturaModela(int id, ModelZCSoftvera model, Korak korak,
-			 Korak sledeci_korak) {
+			Korak sledeci_korak) {
 		super();
 		this.id = id;
 		this.model = model;
-		this.korak = korak;		
+		this.korak = korak;
 		this.sledeci_korak = sledeci_korak;
 	}
-	
+
 	public StrukturaModela(int id, ModelZCSoftvera model, Korak korak) {
 		super();
 		this.id = id;

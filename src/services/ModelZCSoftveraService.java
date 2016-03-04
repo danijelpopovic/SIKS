@@ -5,8 +5,6 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
-import model.Faza;
-import model.Korak;
 import model.ModelZCSoftvera;
 
 public class ModelZCSoftveraService {

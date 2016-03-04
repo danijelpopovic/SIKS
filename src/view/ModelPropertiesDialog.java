@@ -4,14 +4,18 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 public class ModelPropertiesDialog extends JDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5825208841624422507L;
 	private JPanel panel;
 	private JPanel panelNaziv;
 	private JPanel panelSkraceni;
@@ -27,6 +31,9 @@ public class ModelPropertiesDialog extends JDialog {
 
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle("Osobine modela");
+		
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
 		
 		Dimension size = new Dimension(100, 20);				
 		

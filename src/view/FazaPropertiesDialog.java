@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -12,21 +13,30 @@ import javax.swing.JPanel;
 
 public class FazaPropertiesDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6941225086152129185L;
 	private JPanel panel;
 	private JPanel panelNaziv;
 	private JPanel panelKoraci;
 	private JLabel lblNaziv;
 	private JLabel lblNazivFaze;
 	private JLabel lblKoraci;
+	@SuppressWarnings("rawtypes")
 	private JComboBox koraci;
-	
+
+	@SuppressWarnings("rawtypes")
 	public FazaPropertiesDialog(JFrame parent) {
 
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle("Osobine faze");
 
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
+
 		Dimension size = new Dimension(100, 20);
-		
+
 		koraci = new JComboBox();
 
 		panel = new JPanel();
@@ -46,7 +56,7 @@ public class FazaPropertiesDialog extends JDialog {
 		lblKoraci.setMaximumSize(size);
 		koraci.setPreferredSize(size);
 		koraci.setMaximumSize(size);
-		
+
 		lblNaziv.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
 		lblKoraci.setFont(f.deriveFont(f.getStyle() ^ Font.BOLD));
 
@@ -57,7 +67,7 @@ public class FazaPropertiesDialog extends JDialog {
 
 		panelNaziv.add(lblNaziv);
 		panelNaziv.add(lblNazivFaze);
-		
+
 		panelKoraci.add(lblKoraci);
 		panelKoraci.add(koraci);
 
@@ -79,14 +89,14 @@ public class FazaPropertiesDialog extends JDialog {
 		this.lblNazivFaze = lblNazivFaze;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public JComboBox getKoraci() {
 		return koraci;
 	}
 
+	@SuppressWarnings("rawtypes")
 	public void setKoraci(JComboBox koraci) {
 		this.koraci = koraci;
 	}
-	
-	
 
 }

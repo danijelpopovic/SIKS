@@ -8,6 +8,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -23,6 +24,7 @@ import javax.swing.ListSelectionModel;
 import model.table.Korak;
 import net.miginfocom.swing.MigLayout;
 
+@SuppressWarnings({ "rawtypes", "serial" })
 public class DialogKorak extends JDialog {
 
 	public model.table.Korak tableModel;
@@ -32,22 +34,26 @@ public class DialogKorak extends JDialog {
 	public String[] columns;
 	public JTable table;
 	public JTextField txtNaziv;
-	private JTextField textFaza;
+	private JTextField textFaza;	
 	public JComboBox cmbFazaAkcija;
 	public JComboBox cmbFaza;
 	public JButton btnObrisi;
 
+	@SuppressWarnings("unchecked")
 	public DialogKorak(JFrame parent) {
 
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle("Koraci");
 		panTable = new JPanel(new BorderLayout());
 		panTable.setBackground(Color.WHITE);
+		
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
 
 		columns = new String[3];
-		columns[0] = "id";
-		columns[1] = "naziv";
-		columns[2] = "faza";
+		columns[0] = "Id";
+		columns[1] = "Naziv";
+		columns[2] = "Faza";
 
 		tableModel = new model.table.Korak(columns, 0);
 

@@ -6,7 +6,6 @@ import java.util.Enumeration;
 import javax.swing.tree.TreeNode;
 
 import model.Faza;
-import model.ModelZCSoftvera;
 
 public class ModelZcTree implements TreeNode{
 
@@ -71,6 +70,7 @@ public class ModelZcTree implements TreeNode{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Enumeration<Faza> children() {
 		// TODO Auto-generated method stub

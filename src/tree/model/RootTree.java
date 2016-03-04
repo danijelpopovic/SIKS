@@ -3,7 +3,6 @@ package tree.model;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
-import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 
 import model.Faza;
@@ -32,12 +31,6 @@ public class RootTree implements TreeNode{
 		modelZCSoftveras.remove(model);
 	}
 	
-/*	@SuppressWarnings("rawtypes")
-	public Enumeration<ModelZCSoftvera> children() {
-		
-		return ((Enumeration<ModelZCSoftvera>) modelZCSoftveras);
-	}
-*/
 	public ArrayList<ModelZCSoftvera> getModelZCSoftveras() {
 		return modelZCSoftveras;
 	}
@@ -92,10 +85,11 @@ public class RootTree implements TreeNode{
 		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Enumeration<Faza> children() {
 		// TODO Auto-generated method stub
-		return (Enumeration<Faza>)modelZCSoftveras;
+		return (Enumeration<Faza>) modelZCSoftveras;
 	}
 
 	

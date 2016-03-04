@@ -3,7 +3,6 @@ package actions;
 import gui.MainFrame;
 
 import java.awt.event.ActionEvent;
-import java.util.Collection;
 
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
@@ -13,8 +12,13 @@ import services.ModelZCSoftveraService;
 
 public class EditModelSubmit extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2111560131449301567L;
+
 	public EditModelSubmit() {
-		putValue(NAME, "Izmeni");
+		putValue(NAME, "Izmeni model");
 	}
 
 	@Override
@@ -42,7 +46,6 @@ public class EditModelSubmit extends AbstractAction {
 
 		ms.updateModelZCSoftvera(
 				((ModelZCSoftvera) o).getId(), naziv, skraceni, opis);
-		//MainFrame.getInstance().getTreeView().AddModelZC(model);
 		MainFrame.getInstance().getEditModelDialog().dispose();
 
 	}

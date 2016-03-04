@@ -5,6 +5,7 @@ import gui.MainFrame;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
@@ -16,10 +17,15 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 
-import model.StrukturaModela;
 import net.miginfocom.swing.MigLayout;
 
+@SuppressWarnings("rawtypes")
 public class DefineStructView extends JDialog {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8973470025521294703L;
 
 	public JLabel lblModel;
 	public JComboBox cmbModel;
@@ -38,15 +44,19 @@ public class DefineStructView extends JDialog {
 	public DefineStructView(JFrame parent) {
 		super(parent);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setTitle("Struktura modela");
+
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
 
 		panTable = new JPanel(new BorderLayout());
 		panTable.setBackground(Color.WHITE);
 
 		columns = new String[4];
-		columns[0] = "id";
-		columns[1] = "model";
-		columns[2] = "korak";
-		columns[3] = "sledeci korak";
+		columns[0] = "Id";
+		columns[1] = "Model";
+		columns[2] = "Korak";
+		columns[3] = "Sledeći korak";
 
 		tableModel = new model.table.StrukturaModela(columns, 0);
 		table = new JTable(tableModel);
@@ -72,7 +82,7 @@ public class DefineStructView extends JDialog {
 		cmbKorak = new JComboBox();
 		panDetail.add(cmbKorak, "cell 1 2,growx");
 
-		JLabel lblSledeciKorak = new JLabel("Sledeci korak");
+		JLabel lblSledeciKorak = new JLabel("Sledeći korak");
 		panDetail.add(lblSledeciKorak, "cell 0 3,alignx trailing");
 
 		cmbSledeciKorak = new JComboBox();

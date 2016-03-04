@@ -3,7 +3,6 @@ package actions;
 public class ActionManager {
 
 	private AddNewFaza addNewFaza;
-	private AddNewKorak addNewKorak;
 	private AddNewModel addNewModel;
 	private AddNewModelSubmit addNewModelSubmit;
 	private SubmitAddFaza submitAddFaza;
@@ -30,7 +29,6 @@ public class ActionManager {
 	private void initialiseActions() {
 
 		addNewFaza = new AddNewFaza();
-		addNewKorak = new AddNewKorak();
 		addNewModel = new AddNewModel();
 		addNewModelSubmit = new AddNewModelSubmit();
 		submitAddFaza = new SubmitAddFaza();
@@ -57,14 +55,6 @@ public class ActionManager {
 
 	public void setAddNewFaza(AddNewFaza addNewFaza) {
 		this.addNewFaza = addNewFaza;
-	}
-
-	public AddNewKorak getAddNewKorak() {
-		return addNewKorak;
-	}
-
-	public void setAddNewKorak(AddNewKorak addNewKorak) {
-		this.addNewKorak = addNewKorak;
 	}
 
 	public AddNewModel getAddNewModel() {

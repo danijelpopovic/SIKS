@@ -4,7 +4,6 @@ import gui.MainFrame;
 
 import java.awt.event.ActionEvent;
 import java.util.Collection;
-import java.util.Set;
 
 import javax.swing.AbstractAction;
 
@@ -15,12 +14,17 @@ import view.FazaPropertiesDialog;
 
 public class FazaProperties extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 546899263426877695L;
 	public FazaPropertiesDialog dialog;
 
 	public FazaProperties() {
 		putValue(NAME, "Osobine faze");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

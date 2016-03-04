@@ -2,7 +2,6 @@ package model;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -10,6 +9,11 @@ import javax.swing.tree.DefaultMutableTreeNode;
 public class Faza extends DefaultMutableTreeNode{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7760744273006575193L;
+
 	public int id;
 
 	public String nazivFaze;

@@ -5,14 +5,16 @@ import gui.MainFrame;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.JLabel;
 
 import model.ModelZCSoftvera;
-import services.ModelZCSoftveraService;
 import view.ModelPropertiesDialog;
 
 public class ModelProperties extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6108586281280801122L;
 	public ModelPropertiesDialog dialog;
 
 	public ModelProperties() {

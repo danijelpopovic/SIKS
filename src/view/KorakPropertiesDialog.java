@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,6 +12,10 @@ import javax.swing.JPanel;
 
 public class KorakPropertiesDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3498851053933288408L;
 	private JPanel panel;
 	private JPanel panelNaziv;
 	private JPanel panelFaza;
@@ -23,6 +28,9 @@ public class KorakPropertiesDialog extends JDialog {
 
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle("Osobine koraka");
+
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
 
 		Dimension size = new Dimension(100, 20);
 
@@ -83,6 +91,6 @@ public class KorakPropertiesDialog extends JDialog {
 
 	public void setLblFazaKoraka(JLabel lblFazaKoraka) {
 		this.lblFazaKoraka = lblFazaKoraka;
-	}	
+	}
 
 }

@@ -1,15 +1,20 @@
 package model.table;
 
+import gui.MainFrame;
+import gui.tablemodel.DialogTableModel;
+
 import java.util.List;
 
 import services.KorakService;
-import gui.MainFrame;
-import gui.tablemodel.DialogTableModel;
-import model.Faza;
 
 public class Korak extends DialogTableModel{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1489675781809696939L;
+
 	public Korak(Object[] colNames, int rowCount) {
 		super(colNames, rowCount);
 		// TODO Auto-generated constructor stub

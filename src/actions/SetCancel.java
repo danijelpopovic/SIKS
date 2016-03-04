@@ -8,6 +8,10 @@ import javax.swing.AbstractAction;
 
 public class SetCancel extends AbstractAction{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 770147571482173205L;
 	public SetCancel(){
 		putValue(NAME, "Cancel");
 	}

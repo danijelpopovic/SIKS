@@ -9,20 +9,23 @@ import java.util.Vector;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
+public class ModelZCSoftvera extends DefaultMutableTreeNode {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3559485282811652376L;
 
+	public int id;
 
-public class ModelZCSoftvera extends DefaultMutableTreeNode{
-
-	public int id;	
-	
 	public String naziv;
 
 	public String skraceniNaziv;
 
 	public String opis;
 
-	public Set<StrukturaModela> strukturaModela = new HashSet<StrukturaModela>(0);
+	public Set<StrukturaModela> strukturaModela = new HashSet<StrukturaModela>(
+			0);
 
 	public int getId() {
 		return id;
@@ -56,8 +59,6 @@ public class ModelZCSoftvera extends DefaultMutableTreeNode{
 		this.opis = opis;
 	}
 
-	
-
 	public Set<StrukturaModela> getStrukturaModela() {
 		return strukturaModela;
 	}
@@ -66,15 +67,14 @@ public class ModelZCSoftvera extends DefaultMutableTreeNode{
 		this.strukturaModela = strukturaModela;
 	}
 
-	public ModelZCSoftvera(int id, String naziv,
-			String skraceniNaziv, String opis,
-			List<StrukturaModela> strukturaModela) {
+	public ModelZCSoftvera(int id, String naziv, String skraceniNaziv,
+			String opis, List<StrukturaModela> strukturaModela) {
 		super();
 		this.id = id;
 		this.naziv = naziv;
 		this.skraceniNaziv = skraceniNaziv;
 		this.opis = opis;
-		//this.strukturaModela = strukturaModela;
+		// this.strukturaModela = strukturaModela;
 	}
 
 	public ModelZCSoftvera(int id) {
@@ -83,24 +83,24 @@ public class ModelZCSoftvera extends DefaultMutableTreeNode{
 	}
 
 	public ModelZCSoftvera() {
-		
+
 	}
 
 	@Override
 	public String toString() {
 		return naziv;
 	}
-	
+
 	public Enumeration<Faza> children() {
 		// TODO Auto-generated method stub
 		Enumeration<Faza> en;
 		Vector<Faza> d = new Vector<Faza>();
-		
+
 		List<Faza> fs = new ArrayList<Faza>();
 		Faza f1 = new Faza();
 		f1.setNazivFaze("faza 2");
 		fs.add(f1);
-		for(int i = 0; i < fs.size(); i++){
+		for (int i = 0; i < fs.size(); i++) {
 			d.add(fs.get(i));
 		}
 		en = d.elements();

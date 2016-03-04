@@ -6,6 +6,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -15,6 +16,10 @@ import javax.swing.JTextField;
 
 public class EditModelDialog extends JDialog {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4327762570573949885L;
 	public JPanel panDetail;
 	public JPanel panNaziv;
 	public JPanel panSkraceni;
@@ -33,6 +38,9 @@ public class EditModelDialog extends JDialog {
 
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.setTitle("Izmena modela");
+
+		ImageIcon img = new ImageIcon("Icon/icon.png");
+		this.setIconImage(img.getImage());
 
 		Dimension size = new Dimension(100, 20);
 
@@ -79,8 +87,8 @@ public class EditModelDialog extends JDialog {
 		lblPrazna.setMaximumSize(size);
 		JButton btnSave = new JButton(MainFrame.getInstance()
 				.getActionManager().getEditModelSubmit());
-		btnSave.setPreferredSize(new Dimension(100, 20));
-		btnSave.setMaximumSize(new Dimension(100, 20));
+		btnSave.setPreferredSize(new Dimension(120, 20));
+		btnSave.setMaximumSize(new Dimension(120, 20));
 		panSave.add(lblPrazna);
 		panSave.add(btnSave);
 		panDetail.add(panSave);

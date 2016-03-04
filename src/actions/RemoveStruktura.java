@@ -19,8 +19,13 @@ import view.DefineStructView;
 
 public class RemoveStruktura extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1639077323314281396L;
+
 	public RemoveStruktura(){
-		putValue(NAME, "Obrisi");
+		putValue(NAME, "Obriši");
 	}
 	
 	@Override

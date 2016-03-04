@@ -3,14 +3,20 @@ package actions;
 import gui.MainFrame;
 
 import java.awt.event.ActionEvent;
+import java.util.Collection;
 
 import javax.swing.AbstractAction;
 
 import model.Korak;
+import services.KorakService;
 import view.KorakPropertiesDialog;
 
 public class KorakProperties extends AbstractAction {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4786684352866735480L;
 	public KorakPropertiesDialog dialog;
 
 	public KorakProperties() {
@@ -26,12 +32,17 @@ public class KorakProperties extends AbstractAction {
 		Object o = MainFrame.getInstance().getTreeView()
 				.getLastSelectedPathComponent();
 		
-		System.out.println(((Korak)o).getFaza());
+		KorakService ks = MainFrame.getInstance().getKorakService();
+		Collection<Korak> koraci = ks.findAllKoraci();
+		
+		String faza = "";
+		
+		for (Korak k : koraci) {
+			if (k.getNaziv() ==((Korak)o).getNaziv())
+				faza = k.getFaza().getNazivFaze();			
+		}
 		
 		String naziv = ((Korak)o).getNaziv();
-		String faza = ((Korak)o).getFaza().getNazivFaze();
-		
-		System.out.println(faza);
 		
 		dialog.getLblNazivKoraka().setText(naziv);
 		dialog.getLblFazaKoraka().setText(faza);
