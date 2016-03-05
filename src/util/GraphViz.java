@@ -32,6 +32,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
+import java.util.Properties;
 
 /**
  * <dl>
@@ -77,12 +78,11 @@ public class GraphViz
 	/**
 	 * Detects the client's operating system.
 	 */
-//	private final static String osName = System.getProperty("os.name").replaceAll("\\s","");
 
 	/**
 	 * Load the config.properties file.
 	 */
-/*	private final static String cfgProp = "config/config.properties";
+	private final static String cfgProp = "src/graphViz.properties";
 	private final static Properties configFile = new Properties() {
 		private final static long serialVersionUID = 1L; {
 			try {
@@ -91,7 +91,7 @@ public class GraphViz
 				System.err.println(e);
 			}
 		}
-	};*/
+	};
 
 	/**
 	 * The dir. where temporary files will be created.
@@ -101,7 +101,7 @@ public class GraphViz
 	/**
 	 * Where is your dot program located? It will be called externally.
 	 */
-	private static String DOT = "c:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe";
+	private static String DOT = configFile.getProperty("dot");
 
 	/**
 	 * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
@@ -272,8 +272,6 @@ public class GraphViz
 			img = File.createTempFile("graph_", "."+type, new File(GraphViz.TEMP_DIR));
 			Runtime rt = Runtime.getRuntime();
 
-			// patch by Mike Chenault
-			// representation type with -K argument by Olivier Duplouy
 			String[] args = {DOT, "-T"+type, "-K"+representationType, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
 			Process p = rt.exec(args);
 			p.waitFor();
@@ -310,14 +308,9 @@ public class GraphViz
 	{
 		File temp;
 		try {
-			//System.out.println(GraphViz.TEMP_DIR);
 			temp = File.createTempFile("graph_", ".dot.tmp", new File(GraphViz.TEMP_DIR));
-			//System.out.println(GraphViz.TEMP_DIR);
-			System.out.println(temp);
 			FileWriter fout = new FileWriter(temp);
-			//System.out.println(GraphViz.TEMP_DIR);
 			fout.write(str);
-			//System.out.println(GraphViz.TEMP_DIR);
 			fout.close();
 		}
 		catch (Exception e) {

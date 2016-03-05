@@ -60,7 +60,7 @@ public class NewModelDialog extends JDialog {
 
 		panSkraceni = new JPanel();
 		panSkraceni.setAlignmentX(Component.LEFT_ALIGNMENT);
-		lblSkraceni = new JLabel("Skraceni naziv:");
+		lblSkraceni = new JLabel("Skraćeni naziv:");
 		lblSkraceni.setPreferredSize(size);
 		lblSkraceni.setMaximumSize(size);
 		panSkraceni.add(lblSkraceni);

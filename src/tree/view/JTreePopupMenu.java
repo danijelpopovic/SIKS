@@ -52,14 +52,10 @@ public class JTreePopupMenu {
 		popupMenu.add(addModelZC);
 		popupMenu.add(removeModelZC);
 		popupMenu.add(defineModel);
-
 		popupMenu.add(addKorak);
 		popupMenu.add(korakProperties);
-
 		popupMenu.add(addFaza);
-
 		popupMenu.add(editModel);
-
 		popupMenu.add(modelProperties);
 		popupMenu.add(fazaProperties);
 		popupMenu.add(korakProperties);

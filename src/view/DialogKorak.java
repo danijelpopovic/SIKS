@@ -109,7 +109,7 @@ public class DialogKorak extends JDialog {
 		panel.setLayout(new MigLayout("", "[grow][][grow]", "[]"));
 
 		cmbFazaAkcija = new JComboBox();
-		cmbFazaAkcija.addItem("Postojeca");
+		cmbFazaAkcija.addItem("Postojeća");
 		cmbFazaAkcija.addItem("Nova");
 
 		textFaza = new JTextField();
