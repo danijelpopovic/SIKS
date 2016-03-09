@@ -62,7 +62,7 @@ public class KorakTableSubmit extends AbstractAction {
 			Faza selektovanaFaza = (Faza) MainFrame.getInstance()
 					.getDialogKorak().getCmbFaza().getSelectedItem();
 			if (selektovanaFaza != null) {
-				faza = fs.findFaza(selektovanaFaza.id);
+				faza = fs.findFaza(selektovanaFaza.getId());
 			} else {
 				JOptionPane.showMessageDialog(null, "Morate izabrati fazu",
 						"Upozorenje", JOptionPane.ERROR_MESSAGE);
